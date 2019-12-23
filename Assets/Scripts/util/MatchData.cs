@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // The RoundData class stores all scouting data for a specific match. 
-public class RoundData : MonoBehaviour {
+public class MatchData : MonoBehaviour {
    public bool red = false;         
    public int matchNumber = -1;
    public int teamNumber = -1;

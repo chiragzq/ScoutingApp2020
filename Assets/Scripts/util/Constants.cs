@@ -40,5 +40,14 @@ public class Constants : MonoBehaviour
 
     public static void setRole(int newRoleIndex) {
         roleIndex = newRoleIndex;
+        PlayerPrefs.SetInt("role", newRoleIndex);
+    }
+    
+    public static string getRoleName() {
+        if(roleIndex == -1) {
+            return "No role";
+        } else {
+            return roles[roleIndex];
+        }
     }
 }

@@ -12,25 +12,29 @@ public class Login : MonoBehaviour
     public TMP_InputField inputField;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         if(Constants.loggedIn) {
-            SceneManager.LoadScene("RoleSelection");
+            if(Constants.roleIndex == -1)
+                SceneManager.LoadScene("RoleSelection");
+            else
+                SceneManager.LoadScene("MainMenu");
         }
-        submitButton.onClick.AddListener(submitUsername);
+        submitButton.onClick.AddListener(SubmitUsername);
     }
 
-    void submitUsername() {
+    void SubmitUsername() {
         string username = inputField.text;
         if(Array.IndexOf(Constants.usernames, username) > -1) {
             Constants.setUsername(username);
-            SceneManager.LoadScene("RoleSelection");
+            if(Constants.roleIndex == -1)
+                SceneManager.LoadScene("RoleSelection");
+            else
+                SceneManager.LoadScene("MainMenu");
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         
     }
 }

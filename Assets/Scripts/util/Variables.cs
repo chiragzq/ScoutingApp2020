@@ -5,5 +5,6 @@ using UnityEngine;
 // Variables stores temporary values that are used between scenes.
 public class Variables : MonoBehaviour
 {   
-    public static RoundData currentRound;
+    // The current match data (or null if no match is being scouted)
+    public static MatchData currentMatch;
 }
