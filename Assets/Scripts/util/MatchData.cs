@@ -33,4 +33,8 @@ public class MatchData : MonoBehaviour {
    public int climbPos = -1; // A number from 1 to 7 representing the location along the bar of the climb
    
    public string comments = ""; // vary depending on role
+
+   public string ToString() {
+      return "MATCH DATA\n===========";
+   }
 }

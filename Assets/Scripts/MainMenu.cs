@@ -62,6 +62,7 @@ public class MainMenu : MonoBehaviour
     void StartRound() {
         Variables.currentMatch.teamIndex = teamDropdown.value;
         Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+        Variables.currentMatch.red =  teamDropdown.value < 3;
         // SceneManager.LoadScene("GamePieces")
     }
 
