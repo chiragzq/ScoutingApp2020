@@ -6,5 +6,5 @@ using UnityEngine;
 public class Variables : MonoBehaviour
 {   
     // The current match data (or null if no match is being scouted)
-    public static MatchData currentMatch;
+    public static MatchData currentMatch = new MatchData();
 }
