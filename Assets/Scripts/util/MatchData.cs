@@ -29,8 +29,8 @@ public class MatchData {
    public int brickTime = 0; // in seconds
 
    // Endgame data
-   public bool canClimb = false;
-   public int climbPos = -1; // A number from 1 to 7 representing the location along the bar of the climb
+   public int climbType = 0; // 0 for none, 1 for park, 2 for climb
+   public int climbPos = -1; // A number from 0 to 4 representing the location along the bar of the climb
    
    public string comments = ""; // vary depending on role
 
@@ -40,27 +40,27 @@ public class MatchData {
       matchNumber = -1;
       teamIndex = -1;
 
-      bool initLine = false;
-      int autonLower = 0;
-      int autonOuter = 0;
-      int autonInner = 0;
+      initLine = false;
+      autonLower = 0;
+      autonOuter = 0;
+      autonInner = 0;
    
-      int teleopLower = 0;
-      int teleopOuter = 0;
-      int teleopInner = 0;
+      teleopLower = 0;
+      teleopOuter = 0;
+      teleopInner = 0;
    
-      bool canSpin = false;
-      bool rotControl = false;
-      bool posControl = false;
+      canSpin = false;
+      rotControl = false;
+      posControl = false;
    
-      int drops = 0;
-      int defenseTime = 0;
-      int brickTime = 0; 
+      drops = 0;
+      defenseTime = 0;
+      brickTime = 0; 
 
-      bool canClimb = false;
-      int climbPos = -1; 
+      climbType = 0;
+      climbPos = -1; 
       
-      string comments = ""; 
+      comments = ""; 
    }
 
    string ToString() {

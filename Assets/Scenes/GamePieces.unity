@@ -5630,10 +5630,10 @@ MonoBehaviour:
   dropsPlus: {fileID: 2104046664}
   dropsMinus: {fileID: 1623331732}
   dropsText: {fileID: 1345270492}
-  canSpinToggle: {fileID: 0}
-  rotControlToggle: {fileID: 0}
-  posControlToggle: {fileID: 0}
-  initLineToggle: {fileID: 0}
+  canSpinToggle: {fileID: 1598202516}
+  rotControlToggle: {fileID: 1972859766}
+  posControlToggle: {fileID: 864871597}
+  initLineToggle: {fileID: 1572999239}
   autonToggle: {fileID: 1858238489}
   autonButtonText: {fileID: 308747242}
   defenseButton: {fileID: 1724472078}
@@ -5641,7 +5641,7 @@ MonoBehaviour:
   brickedButton: {fileID: 1561186078}
   brickedButtonText: {fileID: 1101240194}
   backButton: {fileID: 362532710}
-  nextButton: {fileID: 0}
+  nextButton: {fileID: 396584779}
 --- !u!1 &1490121769
 GameObject:
   m_ObjectHideFlags: 0
