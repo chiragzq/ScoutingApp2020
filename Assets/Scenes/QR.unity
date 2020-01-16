@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QRRawImage: {fileID: 1598609267}
-  doneButton: {fileID: 0}
+  doneButton: {fileID: 1115027275}
 --- !u!4 &1174191245
 Transform:
   m_ObjectHideFlags: 0

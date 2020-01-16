@@ -14,6 +14,7 @@ public class Endgame : MonoBehaviour
     public Toggle fullClimb;
 
     public Button commentsButton;
+    public Button backButton;
 
     private bool justChanged = false; // Used when the value of a toggle is modified in its 
                                       // onValueChanged listener, to prevent stackoverflow
@@ -25,6 +26,7 @@ public class Endgame : MonoBehaviour
         fullClimb.onValueChanged.AddListener(fullClicked);
 
         commentsButton.onClick.AddListener(nextScene);
+        backButton.onClick.AddListener(prevScene);
     }
 
     void noneClicked(bool value) {
@@ -66,6 +68,10 @@ public class Endgame : MonoBehaviour
             Variables.currentMatch.climbType = 2;
         }
         Debug.Log(QRGenerator.getBinaryString(Variables.currentMatch));
-        SceneManager.LoadScene("comments");
+        SceneManager.LoadScene("Comments");
+    }
+
+    void prevScene() {
+        SceneManager.LoadScene("GamePieces");
     }
 }
