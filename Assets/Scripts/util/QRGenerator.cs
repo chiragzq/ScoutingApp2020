@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class QRGenerator
         // Color32[] encoded = writer.Write(getBinaryString(data));
 
         var hints = new Dictionary<EncodeHintType, object> { {EncodeHintType.MARGIN, 2} };
-        BitMatrix bitMatrix = new MultiFormatWriter().encode(getBinaryString(data), BarcodeFormat.QR_CODE, width, height, hints);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(getByteString(getBinaryString(data)), BarcodeFormat.QR_CODE, width, height, hints);
         Color[] pixels = new Color[bitMatrix.Width * bitMatrix.Height];
         int pos = 0;
         for (int y = 0; y < bitMatrix.Height; y++)
@@ -46,6 +47,17 @@ public class QRGenerator
         texture.SetPixels(pixels);
         texture.Apply();
         return texture;
+    }
+
+    // Converts a string of 0s and 1s to their ascii equivalent
+    public static string getByteString(string binaryString) {
+        var list = new List<Byte>();
+        Debug.Log(binaryString);
+        for (int i = 0; i < binaryString.Length; i += 8) {
+          String t = binaryString.Substring(i, Math.Min(8, binaryString.Length - i));
+          list.Add(Convert.ToByte(t, 2));
+        }  
+        return Encoding.ASCII.GetString(list.ToArray());
     }
 
     public static string getBinaryString(MatchData data)
