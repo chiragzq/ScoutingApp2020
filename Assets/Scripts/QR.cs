@@ -10,8 +10,8 @@ public class QR : MonoBehaviour
     public RawImage QRRawImage;
     public Button doneButton;
 
-    private int width = Screen.height;
-    private int height = Screen.height;
+    private int width = 600;
+    private int height = 600;
 
     // Start is called before the first frame update
     void Start()

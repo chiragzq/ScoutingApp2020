@@ -7,7 +7,7 @@ using UnityEngine;
 // It also contains some utility methods for getting values (e.g. Role Names)
 public class Constants : MonoBehaviour
 {
-    public const string versionString = "Version 0.1.0 (Development)";
+    public const string versionString = "Version 0.1.1 (Development)";
 
     // List of usernames who use the app
     public static readonly string[] usernames = {
