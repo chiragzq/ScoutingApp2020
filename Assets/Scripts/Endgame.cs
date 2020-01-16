@@ -65,6 +65,7 @@ public class Endgame : MonoBehaviour
         if(fullClimb.isOn) {
             Variables.currentMatch.climbType = 2;
         }
+        Debug.Log(QRGenerator.getBinaryString(Variables.currentMatch));
         SceneManager.LoadScene("comments");
     }
 }

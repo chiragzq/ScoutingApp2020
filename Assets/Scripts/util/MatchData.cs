@@ -4,6 +4,7 @@ using UnityEngine;
 
 // The RoundData class stores all scouting data for a specific match. 
 public class MatchData {
+   public bool side = false; // false = left
    public bool red = false;         
    public int matchNumber = -1;
    public int teamNumber = -1;
@@ -29,7 +30,7 @@ public class MatchData {
    public int brickTime = 0; // in seconds
 
    // Endgame data
-   public int climbType = 0; // 0 for none, 1 for park, 2 for climb
+   public int climbType = 0; // 0 for none, 1 for park, 2 for climb 
    public int climbPos = -1; // A number from 0 to 4 representing the location along the bar of the climb
    
    public string offenseComments = ""; 
@@ -42,6 +43,7 @@ public class MatchData {
    public bool stableRobot = false;
 
    void reset() {
+      side = false;
       red = false;
       teamNumber = -1;
       matchNumber = -1;
@@ -78,7 +80,33 @@ public class MatchData {
       stableRobot = false;
    }
 
-   string ToString() {
-      return "MATCH DATA\n===========";
+   public void printMatch() {
+      Debug.Log("MATCH DATA\n==========="
+               + "\n" + "Side: " + (side ? "Right" : "Left")
+               + "\n" + "Color: " + (red ? "Red" : "Blue")
+               + "\n" + "Team " + teamNumber + ", match " + matchNumber + ", team index " + teamIndex
+               + "\n" + "AUTON\n==========="
+               + "\n" + "Init line: " + (initLine ? "Yes" : " No")
+               + "\n" + autonLower + " Lower, " + autonOuter + " Outer, " + autonInner + " Inner"
+               + "\n" + "TELEOP\n==========="
+               + "\n" + teleopLower + " Lower, " + teleopOuter + " Outer, " + teleopInner + " Inner"
+               + "\n" + "Can spin: " + (canSpin ? "Yes" : "No")
+               + "\n" + "Rot control: " + (rotControl ? "Yes" : "No")
+               + "\n" + "Pos control: " + (posControl ? "Yes" : "No")
+               + "\n" + "Drops: " + drops
+               + "\n" + "Defense: " + defenseTime + "s"
+               + "\n" + "Bricked: " + brickTime + "s"
+               + "\n" + "ENDGAME\n==========="
+               + "\n" + "Climb type: " + (climbType == 2 ? "Climb" : (climbType == 1 ? "Park" : "None"))
+               + "\n" + "Climb location: " + (climbType != 2 ? "N/A" : "" + climbPos)
+               + "\n" + "COMMENTS\n==========="
+               + "\n" + "Offense comments: " + offenseComments
+               + "\n" + "General comments: " + generalComments
+               + "\n" + "Control Panel Quick: " + (ctrlPanelQuick ? "Yes" : "No")
+               + "\n" + "Control Panel First Try: " + (ctrlPanelFirst ? "Yes" : "No")
+               + "\n" + "Robust Climb: " + (robustClimb ? "Yes" : "No")
+               + "\n" + "Effective Defense: " + (effectiveDefense ? "Yes" : "No")
+               + "\n" + "Good Driver: " + (goodDriver ? "Yes" : "No")
+               + "\n" + "Stable Robot: " + (stableRobot ? "Yes" : "No"));
    }
 }

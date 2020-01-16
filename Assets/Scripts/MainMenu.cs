@@ -14,14 +14,14 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField matchNumberInput;
     public TMP_Dropdown teamDropdown;
 
-    public Button startButton;
-    public Button recordsButton;
+    public Button leftStartButton;
+    public Button rightStartButton;
     public Button rolesButton;
 
     // Start is called before the first frame update
     void Start() {
-        startButton.onClick.AddListener(StartRound);
-        recordsButton.onClick.AddListener(OpenRecords);
+        leftStartButton.onClick.AddListener(LeftStartRound);
+        rightStartButton.onClick.AddListener(RightStartRound);
         rolesButton.onClick.AddListener(ChangeRoles);
 
         matchNumberInput.onValueChanged.AddListener(checkMatchNumberInput);
@@ -48,26 +48,34 @@ public class MainMenu : MonoBehaviour
             teamDropdown.ClearOptions();
             teamDropdown.AddOptions(teamOptions);
             teamDropdown.interactable = true;
-            startButton.interactable = true;
+            leftStartButton.interactable = true;
+            rightStartButton.interactable = true;
 
             Variables.currentMatch = new MatchData();
-            Variables.currentMatch.matchNumber = matchNumber;
+            Variables.currentMatch.matchNumber = matchNumber + 1;
         } else {
             teamDropdown.ClearOptions();
             teamDropdown.interactable = false;
-            startButton.interactable = false;
+            
+            leftStartButton.interactable = false;
+            rightStartButton.interactable = false;
         }
     }
 
-    void StartRound() {
+    void LeftStartRound() {
+        Variables.currentMatch.side = false;
         Variables.currentMatch.teamIndex = teamDropdown.value;
         Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
         Variables.currentMatch.red =  teamDropdown.value < 3;
         SceneManager.LoadScene("GamePieces");
     }
 
-    void OpenRecords() {
-        // TODO
+    void RightStartRound() {
+        Variables.currentMatch.side = true;
+        Variables.currentMatch.teamIndex = teamDropdown.value;
+        Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+        Variables.currentMatch.red =  teamDropdown.value < 3;
+        SceneManager.LoadScene("GamePieces");
     }
 
     void ChangeRoles() {

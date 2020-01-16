@@ -40,6 +40,8 @@ public class Comments : MonoBehaviour
 
         Variables.currentMatch.offenseComments = offenseText.text;
         Variables.currentMatch.generalComments = generalText.text;
+
+        Variables.currentMatch.printMatch();
         SceneManager.LoadScene("QR");
     }
 }
