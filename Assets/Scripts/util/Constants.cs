@@ -28,6 +28,10 @@ public class Constants : MonoBehaviour
     public static bool loggedIn = PlayerPrefs.HasKey("username");
     public static string username = PlayerPrefs.GetString("username", null);
 
+    void Start() {
+        // PlayerPrefs.DeleteAll();
+    }
+
     public static void setUsername(string newUsername) {
         username = newUsername;
         PlayerPrefs.SetString("username", newUsername);
