@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Endgame.unity
     guid: 07abccb855b0c40df8569607b217e6fb
+  - enabled: 1
+    path: Assets/Scenes/Comments.unity
+    guid: 72a5c4eb555f44c8f82c361fe8d9f534
+  - enabled: 1
+    path: Assets/Scenes/QR.unity
+    guid: 92bdee5d9923c4575985421114bad5e2
   m_configObjects: {}
