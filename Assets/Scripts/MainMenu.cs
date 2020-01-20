@@ -51,8 +51,13 @@ public class MainMenu : MonoBehaviour
             leftStartButton.interactable = true;
             rightStartButton.interactable = true;
 
-            Variables.currentMatch = new MatchData();
-            Variables.currentMatch.matchNumber = matchNumber + 1;
+            if(Constants.roleIndex == 0) {
+                Variables.currentMatch = new MatchData();
+                Variables.currentMatch.matchNumber = matchNumber + 1;
+            } else {
+                Variables.currentLocation = new LocationData();
+                Variables.currentLocation.matchNumber = matchNumber + 1;
+            }
         } else {
             teamDropdown.ClearOptions();
             teamDropdown.interactable = false;
@@ -63,11 +68,19 @@ public class MainMenu : MonoBehaviour
     }
 
     void LeftStartRound() {
-        Variables.currentMatch.side = false;
-        Variables.currentMatch.teamIndex = teamDropdown.value;
-        Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-        Variables.currentMatch.red =  teamDropdown.value < 3;
-        SceneManager.LoadScene("GamePieces");
+        if(Constants.roleIndex == 0) {
+            Variables.currentMatch.side = false;
+            Variables.currentMatch.teamIndex = teamDropdown.value;
+            Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentMatch.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("GamePieces");
+        } else if(Constants.roleIndex == 1) {
+            Variables.currentLocation.side = false;
+            Variables.currentLocation.teamIndex = teamDropdown.value;
+            Variables.currentLocation.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentLocation.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("Location");
+        }
     }
 
     void RightStartRound() {
