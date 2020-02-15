@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class LocationData {
     public bool side = false; // false = left
-    public bool red = false;         
+    public bool red = true; // side ^ red = y 180
+    public bool verticalFlip = false; // x 180     
     public int matchNumber = -1;
     public int teamNumber = -1;
     public int teamIndex = -1; // Index of the team in the match data Constant object.
+    public Cycle currentCycle = new Cycle();
 
     public List<Cycle> cycles = new List<Cycle>();
 
@@ -15,16 +17,18 @@ public class LocationData {
         public int x; // 16
         public int y; // 9
         public int timestamp;
-        public int miss;
+        public int drops;
         public int lower;
         public int outer;
         public int inner;
+
+        public Cycle() {  }
 
         public Cycle(int x, int y, int timestamp, int miss, int lower, int outer, int inner) {
             this.x = x;
             this.y = y;
             this.timestamp = timestamp;
-            this.miss = miss;
+            this.drops = miss;
             this.lower = lower;
             this.outer = outer;
             this.inner = inner;

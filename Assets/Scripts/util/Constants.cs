@@ -7,7 +7,7 @@ using UnityEngine;
 // It also contains some utility methods for getting values (e.g. Role Names)
 public class Constants : MonoBehaviour
 {
-    public const string versionString = "Version 0.1.2 (Development)";
+    public const string versionString = "Version 0.2.0 (Development)";
 
     // List of usernames who use the app
     public static readonly string[] usernames = {
@@ -28,6 +28,8 @@ public class Constants : MonoBehaviour
     public static bool loggedIn = PlayerPrefs.HasKey("username");
     public static string username = PlayerPrefs.GetString("username", null);
 
+    public static bool flipLocation = PlayerPrefs.GetInt("flip", 0) == 1;
+
     void Start() {
         // PlayerPrefs.DeleteAll();
     }
@@ -36,6 +38,13 @@ public class Constants : MonoBehaviour
         username = newUsername;
         PlayerPrefs.SetString("username", newUsername);
         loggedIn = true;
+    }
+
+    public static string getFirstname() {
+        if(username == "guest") 
+            return "Guest";
+        else
+            return username.Substring(2, Constants.username.Length - 3);
     }
 
     public static void setRole(int newRoleIndex) {
@@ -49,5 +58,10 @@ public class Constants : MonoBehaviour
         } else {
             return roles[roleIndex];
         }
+    }
+
+    public static void setFlipped(bool newFlip) {
+        PlayerPrefs.SetInt("flip", newFlip ? 1 : 0);
+        flipLocation = newFlip;
     }
 }

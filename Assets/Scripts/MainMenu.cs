@@ -28,9 +28,12 @@ public class MainMenu : MonoBehaviour
 
         versionText.text = Constants.versionString;
         
-        string firstName = Constants.username.Substring(2, Constants.username.Length - 3);
+        string firstName = Constants.getFirstname();
         firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
         userText.text = "Welcome " + firstName + ", your role is " + Constants.getRoleName() + ".";
+
+        Application.targetFrameRate = 15;
+        QualitySettings.vSyncCount = 0;
     }
 
     void checkMatchNumberInput(string value) {
@@ -84,11 +87,19 @@ public class MainMenu : MonoBehaviour
     }
 
     void RightStartRound() {
-        Variables.currentMatch.side = true;
-        Variables.currentMatch.teamIndex = teamDropdown.value;
-        Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-        Variables.currentMatch.red =  teamDropdown.value < 3;
-        SceneManager.LoadScene("GamePieces");
+        if(Constants.roleIndex == 0) {
+            Variables.currentMatch.side = true;
+            Variables.currentMatch.teamIndex = teamDropdown.value;
+            Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentMatch.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("GamePieces");
+        } else if(Constants.roleIndex == 1) {
+            Variables.currentLocation.side = true;
+            Variables.currentLocation.teamIndex = teamDropdown.value;
+            Variables.currentLocation.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentLocation.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("Location");
+        }
     }
 
     void ChangeRoles() {

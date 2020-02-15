@@ -11,8 +11,7 @@ public class Login : MonoBehaviour
     public Button submitButton;
     public TMP_InputField inputField;
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         if(Constants.loggedIn) {
             if(Constants.roleIndex == -1)
                 SceneManager.LoadScene("RoleSelection");
