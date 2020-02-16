@@ -5,9 +5,14 @@ using UnityEngine;
 // Constants stores data that is persistent between uses of the app.
 // This does not necessarily that their values may be changed.
 // It also contains some utility methods for getting values (e.g. Role Names)
+// 
+// Pre competition checklist:
+// Update usernames
+// Update versionstring
+// Update matchtemas
 public class Constants : MonoBehaviour
 {
-    public const string versionString = "Version 0.2.0 (Development)";
+    public const string versionString = "Version 0.2.1 (Development)";
 
     // List of usernames who use the app
     public static readonly string[] usernames = {

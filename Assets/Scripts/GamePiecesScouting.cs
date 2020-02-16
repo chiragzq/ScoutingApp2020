@@ -169,6 +169,11 @@ public class GamePiecesScouting : MonoBehaviour
         Variables.currentMatch.canSpin = canSpinToggle.isOn;
         Variables.currentMatch.rotControl = rotControlToggle.isOn;
         Variables.currentMatch.posControl = posControlToggle.isOn;
+
+        if(defenseTimestamp != 0) {
+            Variables.currentMatch.defenseTime += currentTime() - defenseTimestamp;
+        }
+
         SceneManager.LoadScene("EndGame");
     }
 

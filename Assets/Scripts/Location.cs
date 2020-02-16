@@ -14,7 +14,6 @@ public class Location : MonoBehaviour
     public Image robotIcon;
 
     public GameObject leftControls;
-    public Button leftFlip;
     public Button leftInnerPlus;
     public Button leftInnerMinus;
     public TextMeshProUGUI leftInnerText;
@@ -27,11 +26,15 @@ public class Location : MonoBehaviour
     public Button leftDropsPlus;
     public Button leftDropsMinus;
     public TextMeshProUGUI leftDropsText;
+    public Button leftDefense;
+    public Button leftAuton;
+        public TextMeshProUGUI leftAutonText;
+    public Button leftUndo;
     public Button leftSubmit;
+    public Button leftNext;
 
 
     public GameObject rightControls;
-    public Button rightFlip;
     public Button rightInnerPlus;
     public Button rightInnerMinus;
     public TextMeshProUGUI rightInnerText;
@@ -44,8 +47,16 @@ public class Location : MonoBehaviour
     public Button rightDropsPlus;
     public Button rightDropsMinus;
     public TextMeshProUGUI rightDropsText;
+    public Button rightDefense;
+    public Button rightAuton;
+        public TextMeshProUGUI rightAutonText;
+    public Button rightUndo;
     public Button rightSubmit;
+    public Button rightNext;
 
+    public bool isAuton;
+    public int startTimestamp;
+    public int defenseTimestamp;
 
     private Vector2 topLeft;
     private Vector2 bottomRight;
@@ -59,6 +70,9 @@ public class Location : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isAuton = true;
+        startTimestamp = currentTime() - 2;
+
         _ratio = Screen.width / 800f;
         float screenWidth = canvas.GetComponent<RectTransform>().rect.width;
         float screenHeight = canvas.GetComponent<RectTransform>().rect.height;
@@ -90,16 +104,9 @@ public class Location : MonoBehaviour
         if(Variables.currentLocation.side) 
             grid.transform.localRotation = Quaternion.Euler(0, 180, 0);
 
+        Variables.currentLocation.side = false;
         if(Variables.currentLocation.side) {
             rightControls.SetActive(false);
-            leftFlip.onClick.AddListener(() => {
-                Constants.setFlipped(!Constants.flipLocation);
-                 if(Constants.flipLocation) 
-                    xRot = 180;
-                else
-                    xRot = 0;
-                field.transform.localRotation = Quaternion.Euler(xRot, yRot, 0);
-            });
 
             leftInnerPlus.onClick.AddListener(innerPlusHandler);
             leftInnerMinus.onClick.AddListener(innerMinusHandler);
@@ -109,16 +116,33 @@ public class Location : MonoBehaviour
             leftLowerMinus.onClick.AddListener(lowerMinusHandler);
             leftDropsPlus.onClick.AddListener(dropsPlusHandler);
             leftDropsMinus.onClick.AddListener(dropsMinusHandler);
+            leftSubmit.onClick.AddListener(submit);
+            leftUndo.onClick.AddListener(undo);
+            leftNext.onClick.AddListener(next);
+
+            leftAuton.onClick.AddListener(() => {
+                isAuton = !isAuton;
+                if(isAuton) {
+                    leftAutonText.text = "Auton";
+                    leftAuton.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
+                } else {
+                    leftAutonText.text = "Teleop";
+                    leftAuton.GetComponent<Image>().color = new Color(231f/255, 151f/255, 1f/255);
+                }
+            });
+
+            leftDefense.onClick.AddListener(() => {
+                 if(defenseTimestamp == 0) {
+                    defenseTimestamp = currentTime();
+                    leftDefense.GetComponent<Image>().color = new Color(60f/255, 9f/255, 128f/255);
+                } else {
+                    Variables.currentLocation.defenseTime += currentTime() - defenseTimestamp;
+                    defenseTimestamp = 0;
+                    leftDefense.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
+                }
+            });
         } else {    
             leftControls.SetActive(false);
-            rightFlip.onClick.AddListener(() => {
-                Constants.setFlipped(!Constants.flipLocation);
-                 if(Constants.flipLocation) 
-                    xRot = 180;
-                else
-                    xRot = 0;
-                field.transform.localRotation = Quaternion.Euler(xRot, yRot, 0);
-            });
 
             rightInnerPlus.onClick.AddListener(innerPlusHandler);
             rightInnerMinus.onClick.AddListener(innerMinusHandler);
@@ -128,6 +152,31 @@ public class Location : MonoBehaviour
             rightLowerMinus.onClick.AddListener(lowerMinusHandler);
             rightDropsPlus.onClick.AddListener(dropsPlusHandler);
             rightDropsMinus.onClick.AddListener(dropsMinusHandler);
+            rightSubmit.onClick.AddListener(submit);
+            rightUndo.onClick.AddListener(undo);
+            rightNext.onClick.AddListener(next);
+
+            rightAuton.onClick.AddListener(() => {
+                isAuton = !isAuton;
+                if(isAuton) {
+                    rightAutonText.text = "Auton";
+                    rightAuton.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
+                } else {
+                    rightAutonText.text = "Teleop";
+                    rightAuton.GetComponent<Image>().color = new Color(231f/255, 151f/255, 1f/255);
+                }
+            });
+
+            rightDefense.onClick.AddListener(() => {
+                 if(defenseTimestamp == 0) {
+                    defenseTimestamp = currentTime();
+                    rightDefense.GetComponent<Image>().color = new Color(60f/255, 9f/255, 128f/255);
+                } else {
+                    Variables.currentLocation.defenseTime += currentTime() - defenseTimestamp;
+                    defenseTimestamp = 0;
+                    rightDefense.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
+                }
+            });
         }
 
     }
@@ -171,13 +220,21 @@ public class Location : MonoBehaviour
             int cellY = (int)(y / cellSize);
             if(cellX >= 15 || cellY >= 9) return;
 
-            robotIcon.rectTransform.sizeDelta = new Vector2(cellSize * 0.85f, cellSize * 0.85f);
-
-            Vector3 cellCenter = new Vector3((cellX + 0.5f) * cellSize + topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;
             Debug.Log(cellX + ", " + cellY);
-            robotIcon.transform.position =  Camera.main.ScreenToWorldPoint(cellCenter);
-            // robotIcon.enabled = true;
+            
+            setIconPosition(cellX, cellY);
+
+            Variables.currentLocation.currentCycle.x = cellX;
+            Variables.currentLocation.currentCycle.y = cellY;
+            Variables.currentLocation.currentCycle.timestamp = currentTime() - startTimestamp;
         }   
+    }
+
+    void setIconPosition(int cellX, int cellY) {
+        robotIcon.rectTransform.sizeDelta = new Vector2(cellSize * 0.85f, cellSize * 0.85f);
+        Vector3 cellCenter = new Vector3((cellX + 0.5f) * cellSize + topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;
+        robotIcon.transform.position = Camera.main.ScreenToWorldPoint(cellCenter);
+        robotIcon.enabled = true;
     }
 
     void outerPlusHandler() {
@@ -217,5 +274,40 @@ public class Location : MonoBehaviour
         if(Variables.currentLocation.currentCycle.drops > 0) {
             Variables.currentLocation.currentCycle.drops--;
         }
+    }
+
+    void submit() {
+        robotIcon.enabled = false;
+        if(isAuton) 
+            Variables.currentLocation.autonCycles.Add(Variables.currentLocation.currentCycle);
+        else
+            Variables.currentLocation.teleopCycles.Add(Variables.currentLocation.currentCycle);
+        Variables.currentLocation.currentCycle = new LocationData.Cycle();
+    }
+
+    void undo() {
+        LocationData.Cycle undoCycle;
+        if(Variables.currentLocation.teleopCycles.Count > 0) {
+            undoCycle = Variables.currentLocation.teleopCycles[Variables.currentLocation.teleopCycles.Count - 1];
+            Variables.currentLocation.teleopCycles.Remove(undoCycle);
+        } else if(Variables.currentLocation.autonCycles.Count > 0) {
+            undoCycle = Variables.currentLocation.autonCycles[Variables.currentLocation.autonCycles.Count - 1];
+            Variables.currentLocation.autonCycles.Remove(undoCycle);
+        } else 
+            return;
+
+        Variables.currentLocation.currentCycle = undoCycle;
+        setIconPosition(undoCycle.x, undoCycle.y);
+    }
+
+    void next() {
+        if(defenseTimestamp != 0) {
+            Variables.currentLocation.defenseTime += currentTime() - defenseTimestamp;
+        }
+        SceneManager.LoadScene("AfterLocation");
+    }
+ 
+    static int currentTime() {
+        return (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
     }
 }
