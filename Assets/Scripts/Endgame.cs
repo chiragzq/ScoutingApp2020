@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class Endgame : MonoBehaviour
 {
+    public SpriteRenderer shieldGenerator;
     public Scrollbar climbLocation;
+    public Image scrollHandle;
     
     public Toggle noneClimb;
     public Toggle parkClimb;
@@ -27,6 +29,11 @@ public class Endgame : MonoBehaviour
 
         commentsButton.onClick.AddListener(nextScene);
         backButton.onClick.AddListener(prevScene);
+
+        shieldGenerator.sprite = Resources.Load<Sprite>("Images/" + (Variables.currentMatch.red ? "Red" : "Blue") + "ShieldGenerator");
+        if(!Variables.currentMatch.red) {
+            scrollHandle.color = new Color(79/255f, 90/255f, 178/255f);
+        }
     }
 
     void noneClicked(bool value) {

@@ -1482,12 +1482,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -11
-  m_Sprite: {fileID: 21300000, guid: 742d3e24446374fa2a47f10e18f1593f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c675ffe4e54fd4278a5bc791e96fdd0d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.04, y: 2.76}
+  m_Size: {x: 54.550003, y: 30.711012}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.882151, b: 0.15806337, a: 1}
+  m_Color: {r: 0.7058824, g: 0.30588236, b: 0.30588236, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2642,7 +2642,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -153.8, y: -60.7}
+  m_AnchoredPosition: {x: -153.8, y: -62.5}
   m_SizeDelta: {x: 329.43, y: 22.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1979578625
@@ -2758,7 +2758,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b835fb6d0ebcd46c4979646defd68d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldGenerator: {fileID: 1117023903}
   climbLocation: {fileID: 1979578625}
+  scrollHandle: {fileID: 1593790662}
   noneClimb: {fileID: 2100479520}
   parkClimb: {fileID: 744769656}
   fullClimb: {fileID: 1131780767}
