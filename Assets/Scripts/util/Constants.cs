@@ -12,7 +12,7 @@ using UnityEngine;
 // Update matchtemas
 public class Constants : MonoBehaviour
 {
-    public const string versionString = "Version 0.2.2 (Development)";
+    public const string versionString = "Version 0.2.3 (Development)";
 
     // List of usernames who use the app
     public static readonly string[] usernames = {

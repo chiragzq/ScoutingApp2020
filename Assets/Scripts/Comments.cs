@@ -31,15 +31,29 @@ public class Comments : MonoBehaviour
     }
 
     void nextScene() {
-        Variables.currentMatch.ctrlPanelQuick = ctrlPanelQuick.isOn;
-        Variables.currentMatch.ctrlPanelFirst = ctrlPanelFirst.isOn;
-        Variables.currentMatch.robustClimb = robustClimb.isOn;
-        Variables.currentMatch.effectiveDefense = effectiveDefense.isOn;
-        Variables.currentMatch.goodDriver = goodDriver.isOn;
-        Variables.currentMatch.stableRobot = stableRobot.isOn;
+        if(Constants.getRoleName() == "Location") {
+            Variables.currentLocation.ctrlPanelQuick = ctrlPanelQuick.isOn;
+            Variables.currentLocation.ctrlPanelFirst = ctrlPanelFirst.isOn;
+            Variables.currentLocation.robustClimb = robustClimb.isOn;
+            Variables.currentLocation.effectiveDefense = effectiveDefense.isOn;
+            Variables.currentLocation.goodDriver = goodDriver.isOn;
+            Variables.currentLocation.stableRobot = stableRobot.isOn;
+            
+            Variables.currentLocation.offenseComments = offenseText.text;
+            Variables.currentLocation.generalComments = generalText.text;
+        } else {
+            Variables.currentMatch.ctrlPanelQuick = ctrlPanelQuick.isOn;
+            Variables.currentMatch.ctrlPanelFirst = ctrlPanelFirst.isOn;
+            Variables.currentMatch.robustClimb = robustClimb.isOn;
+            Variables.currentMatch.effectiveDefense = effectiveDefense.isOn;
+            Variables.currentMatch.goodDriver = goodDriver.isOn;
+            Variables.currentMatch.stableRobot = stableRobot.isOn;
 
-        Variables.currentMatch.offenseComments = offenseText.text;
-        Variables.currentMatch.generalComments = generalText.text;
+            Variables.currentMatch.offenseComments = offenseText.text;
+            Variables.currentMatch.generalComments = generalText.text;
+        }
+
+        
 
         Variables.currentMatch.printMatch();
         SceneManager.LoadScene("QR");

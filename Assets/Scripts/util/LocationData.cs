@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LocationData {
     public bool side = false; // false = left
@@ -54,5 +56,41 @@ public class LocationData {
             this.outer = outer;
             this.inner = inner;
         }  
+
+        public string printCycle() {
+            return "Cycle\n====="
+                + "\nX: " + x + " Y:" + y + "Time: " + timestamp
+                + "\n" + drops + " drops, " + lower + " lower, " + outer + " outer, " + inner + " inner";
+        }
+    }
+
+    public void printLocation() {
+        Debug.Log("LOCATION DATA\n==========="
+           + "\n" + "Side: " + (side ? "Right" : "Left")
+           + "\n" + "Vertical flip: " + (verticalFlip ? "Yes" : "No")
+           + "\n" + "Color: " + (red ? "Red" : "Blue")
+           + "\n" + "Team " + teamNumber + ", match " + matchNumber + ", team index " + teamIndex
+           + "\n" + "AUTON\n==========="
+           + "\n" + "Init line: " + (initLine ? "Yes" : " No")
+           + "\n" + String.Join("\n", autonCycles.Select<Cycle, string>(cycle => cycle.printCycle()).ToArray())
+           + "\n" + "TELEOP\n==========="
+           + "\n" + String.Join("\n", teleopCycles.Select<Cycle, string>(cycle => cycle.printCycle()).ToArray())
+           + "\n" + "Can spin: " + (canSpin ? "Yes" : "No")
+           + "\n" + "Rot control: " + (rotControl ? "Yes" : "No")
+           + "\n" + "Pos control: " + (posControl ? "Yes" : "No")
+           + "\n" + "Defense: " + defenseTime + "s"
+           + "\n" + "Bricked: " + (bricked ? "Yes" : "No")
+           + "\n" + "ENDGAME\n==========="
+           + "\n" + "Climb type: " + (climbType == 2 ? "Climb" : (climbType == 1 ? "Park" : "None"))
+           + "\n" + "Climb location: " + (climbType != 2 ? "N/A" : "" + climbPos)
+           + "\n" + "COMMENTS\n==========="
+           + "\n" + "Offense comments: " + offenseComments
+           + "\n" + "General comments: " + generalComments
+           + "\n" + "Control Panel Quick: " + (ctrlPanelQuick ? "Yes" : "No")
+           + "\n" + "Control Panel First Try: " + (ctrlPanelFirst ? "Yes" : "No")
+           + "\n" + "Robust Climb: " + (robustClimb ? "Yes" : "No")
+           + "\n" + "Effective Defense: " + (effectiveDefense ? "Yes" : "No")
+           + "\n" + "Good Driver: " + (goodDriver ? "Yes" : "No")
+           + "\n" + "Stable Robot: " + (stableRobot ? "Yes" : "No"));
     }
 }

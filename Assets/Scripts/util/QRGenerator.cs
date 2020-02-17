@@ -26,15 +26,6 @@ public class QRGenerator
 
     public static Texture2D generateQR(MatchData data, int width, int height)
     {
-        // var writer = new BarcodeWriter {
-        //     Format = BarcodeFormat.QR_CODE,
-        //     Options = new QrCodeEncodingOptions {
-        //         Width = width,
-        //         Height = height
-        //     }
-        // };
-        // Color32[] encoded = writer.Write(getBinaryString(data));
-
         var hints = new Dictionary<EncodeHintType, object> { {EncodeHintType.MARGIN, 2} };
         BitMatrix bitMatrix = new MultiFormatWriter().encode(getByteString(getBinaryString(data)), BarcodeFormat.QR_CODE, width, height, hints);
         Color[] pixels = new Color[bitMatrix.Width * bitMatrix.Height];
@@ -62,27 +53,27 @@ public class QRGenerator
 
     public static string getBinaryString(MatchData data)
     {
-        string ret = convertNumber(data.teamIndex, 3);
-        ret += convertNumber(data.matchNumber, 7);
-        ret += convertNumber(Array.IndexOf(Constants.usernames, Constants.username), 6);
+        string ret = ensureBits(data.teamIndex, 3);
+        ret += ensureBits(data.matchNumber, 7);
+        ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 6);
 
-        ret += convertNumber(data.autonLower, 4);
-        ret += convertNumber(data.autonOuter, 4);
-        ret += convertNumber(data.autonInner, 4);
+        ret += ensureBits(data.autonLower, 4);
+        ret += ensureBits(data.autonOuter, 4);
+        ret += ensureBits(data.autonInner, 4);
 
-        ret += convertNumber(data.teleopLower, 6);
-        ret += convertNumber(data.teleopOuter, 6);
-        ret += convertNumber(data.teleopInner, 6);
+        ret += ensureBits(data.teleopLower, 6);
+        ret += ensureBits(data.teleopOuter, 6);
+        ret += ensureBits(data.teleopInner, 6);
 
-        ret += convertNumber(Math.Min(127, data.brickTime), 7);
-        ret += convertNumber(Math.Min(127, data.defenseTime), 7);
+        ret += ensureBits(Math.Min(127, data.brickTime), 7);
+        ret += ensureBits(Math.Min(127, data.defenseTime), 7);
 
         ret += data.canSpin ? "1" : "0";
         ret += data.rotControl ? "1" : "0";
         ret += data.posControl ? "1" : "0";
         ret += data.initLine ? "1" : "0";
 
-        ret += convertNumber(data.drops, 4);
+        ret += ensureBits(data.drops, 4);
 
         int climbData = 0; // 0 - 6, 0 & 1 mean park/climb, 2-6 represent a location along the bar of the climb
         if(data.climbType == 0) {
@@ -92,7 +83,7 @@ public class QRGenerator
         } else {
             climbData = 2 + data.climbPos;
         }
-        ret += convertNumber(climbData, 3);
+        ret += ensureBits(climbData, 3);
 
         ret += data.ctrlPanelQuick ? "1" : "0";
         ret += data.ctrlPanelFirst ? "1" : "0";
@@ -107,6 +98,63 @@ public class QRGenerator
         return ret;
     }
 
+    public static string getBinaryString(LocationData data)
+    {
+        string ret = ensureBits(data.teamIndex, 3);
+        ret += ensureBits(data.matchNumber, 7);
+        ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 6);
+
+        ret += ensureBits(data.autonCycles.Count, 2);
+        foreach(LocationData.Cycle cycle in data.autonCycles) {
+            ret += convertCycle(cycle);
+        }
+
+        ret += ensureBits(data.teleopCycles.Count, 5);
+        foreach(LocationData.Cycle cycle in data.teleopCycles) {
+            ret += convertCycle(cycle);
+        }
+
+        ret += data.bricked ? "1" : "0";
+        ret += ensureBits(Math.Min(127, data.defenseTime), 7);
+
+        ret += data.canSpin ? "1" : "0";
+        ret += data.rotControl ? "1" : "0";
+        ret += data.posControl ? "1" : "0";
+        ret += data.initLine ? "1" : "0";
+
+        int climbData = 0; // 0 - 6, 0 & 1 mean park/climb, 2-6 represent a location along the bar of the climb
+        if(data.climbType == 0) {
+            climbData = 0;
+        } else if(data.climbType == 1) {
+            climbData = 1;
+        } else {
+            climbData = 2 + data.climbPos;
+        }
+        ret += ensureBits(climbData, 3);
+
+        ret += data.ctrlPanelQuick ? "1" : "0";
+        ret += data.ctrlPanelFirst ? "1" : "0";
+        ret += data.robustClimb ? "1" : "0";
+        ret += data.effectiveDefense ? "1" : "0";
+        ret += data.goodDriver ? "1" : "0";
+        ret += data.stableRobot ? "1" : "0";
+
+        ret += convertText(data.offenseComments + "%");
+        ret += convertText(data.generalComments);
+
+        return ret;
+    }
+
+    public static string convertCycle(LocationData.Cycle cycle) {
+        return ensureBits(cycle.x, 4) +
+            ensureBits(cycle.y, 3) +
+            ensureBits(cycle.inner, 5) +
+            ensureBits(cycle.outer, 5) +
+            ensureBits(cycle.lower, 5) +
+            ensureBits(cycle.drops, 5);
+            
+    }
+
     static string convertText(string text) {
         string ret = "";
         foreach(char s in text) {
@@ -119,7 +167,7 @@ public class QRGenerator
     }
 
     // converts a base 10 number to a base 2 number, ensuring the output is of a certain length.
-    static string convertNumber(int val, int length) {
+    static string ensureBits(int val, int length) {
         string binary = Convert.ToString(val, 2);
         if(binary.Length < length) {
             while(binary.Length < length) binary = "0" + binary;
