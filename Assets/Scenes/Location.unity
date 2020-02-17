@@ -308,7 +308,7 @@ MonoBehaviour:
   canvas: {fileID: 234039276}
   field: {fileID: 1115417908}
   grid: {fileID: 2026468124}
-  robotIcon: {fileID: 450526762}
+  robot: {fileID: 450526762}
   leftControls: {fileID: 2098477806}
   leftInnerPlus: {fileID: 1410343611}
   leftInnerMinus: {fileID: 368321143}

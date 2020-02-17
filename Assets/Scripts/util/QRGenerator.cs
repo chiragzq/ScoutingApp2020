@@ -24,10 +24,33 @@ public class QRGenerator
         {"z", "11000111100"}, {"%", "110001111001"}
     };
 
-    public static Texture2D generateQR(MatchData data, int width, int height)
-    {
+    public static Texture2D[] generateQR(String binary, int width, int height) {
+        int QR_THRESHOLD = 400;
+        int MAX_EXTRA_BITS = 25; // if the last qr is small, just append it to the previous
+
+        int numQRs = Math.Min((int)(Math.Ceiling((double)binary.Length / QR_THRESHOLD)), 8);
+        if(binary.Length % QR_THRESHOLD <= MAX_EXTRA_BITS) {
+            numQRs--;
+        }
+
+        Debug.Log(binary);
+        Debug.Log(binary.Length);
+        Debug.Log(numQRs);
+
+        Texture2D[] ret = new Texture2D[numQRs];
+
+        int i = 0;
+        for(;i < numQRs - 1;i ++) {
+            ret[i] = generateBinaryTexture(ensureBits(i, 3) + ensureBits(numQRs - 1, 3) + binary.Substring(i * QR_THRESHOLD, QR_THRESHOLD), width, height);
+        }
+        ret[i] = generateBinaryTexture(ensureBits(i, 3) + ensureBits(numQRs - 1, 3) + binary.Substring(i * QR_THRESHOLD), width, height);
+
+        return ret;
+    }
+
+    public static Texture2D generateBinaryTexture(String binary, int width, int height) {
         var hints = new Dictionary<EncodeHintType, object> { {EncodeHintType.MARGIN, 2} };
-        BitMatrix bitMatrix = new MultiFormatWriter().encode(getByteString(getBinaryString(data)), BarcodeFormat.QR_CODE, width, height, hints);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(getByteString(binary), BarcodeFormat.QR_CODE, width, height, hints);
         Color[] pixels = new Color[bitMatrix.Width * bitMatrix.Height];
         int pos = 0;
         for (int y = 0; y < bitMatrix.Height; y++)

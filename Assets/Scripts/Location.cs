@@ -11,7 +11,7 @@ public class Location : MonoBehaviour
     public Canvas canvas;
     public Image field;
     public Image grid;
-    public Image robotIcon;
+    public Image robot;
 
     public GameObject leftControls;
     public Button leftInnerPlus;
@@ -64,6 +64,7 @@ public class Location : MonoBehaviour
     private const int gridWidth = 15;
     private const int gridHeight = 9;
     private float cellSize;
+    private bool flipY;
 
     private float _ratio;
 
@@ -93,18 +94,27 @@ public class Location : MonoBehaviour
 
             cellSize = screenWidth / gridWidth * 1642f / 2048f;
         }
-        robotIcon.enabled = false;
+        robot.enabled = false;
 
         float xRot = 0, yRot = 0;
+
+        if(Variables.currentLocation.side)
+            flipY = !flipY;
+        if(Constants.flipLocation)
+            flipY = !flipY;
+        if(!Variables.currentLocation.red ^ Variables.currentLocation.side)
+            flipY = !flipY;
+        
         if(!Variables.currentLocation.red ^ Variables.currentLocation.side) 
             yRot = 180;
         if(Constants.flipLocation) 
             xRot = 180;
+
         field.transform.localRotation = Quaternion.Euler(xRot, yRot, 0);
         if(Variables.currentLocation.side) 
             grid.transform.localRotation = Quaternion.Euler(0, 180, 0);
 
-        Variables.currentLocation.side = false;
+        // Variables.currentLocation.side = false;
         if(Variables.currentLocation.side) {
             rightControls.SetActive(false);
 
@@ -213,15 +223,21 @@ public class Location : MonoBehaviour
         x *= 1 / _ratio;
         y *= 1 / _ratio;
         if(x >= 0 && y >= 0) {
+            if(Variables.currentLocation.side) {
+                x = canvas.GetComponent<RectTransform>().rect.width - x;   
+            } 
             x -= topLeft.x;
             y -= bottomRight.y;
 
             int cellX = (int)(x / cellSize);
             int cellY = (int)(y / cellSize);
+
+            if(flipY)
+                cellY = gridHeight - cellY - 1;
             if(cellX >= 15 || cellY >= 9) return;
 
             Debug.Log(cellX + ", " + cellY);
-            
+
             setIconPosition(cellX, cellY);
 
             Variables.currentLocation.currentCycle.x = cellX;
@@ -231,10 +247,17 @@ public class Location : MonoBehaviour
     }
 
     void setIconPosition(int cellX, int cellY) {
-        robotIcon.rectTransform.sizeDelta = new Vector2(cellSize * 0.85f, cellSize * 0.85f);
-        Vector3 cellCenter = new Vector3((cellX + 0.5f) * cellSize + topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;
-        robotIcon.transform.position = Camera.main.ScreenToWorldPoint(cellCenter);
-        robotIcon.enabled = true;
+        Vector3 cellCenter;
+        if(flipY)
+            cellY = gridHeight - cellY - 1;
+        if(Variables.currentLocation.side) {
+            cellCenter = new Vector3(canvas.GetComponent<RectTransform>().rect.width - (cellX + 0.5f) * cellSize - topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;
+        } else {
+            cellCenter = new Vector3((cellX + 0.5f) * cellSize + topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;
+        }
+        robot.rectTransform.sizeDelta = new Vector2(cellSize * 0.85f, cellSize * 0.85f);
+        robot.transform.position = Camera.main.ScreenToWorldPoint(cellCenter);
+        robot.enabled = true;
     }
 
     void outerPlusHandler() {
@@ -277,7 +300,7 @@ public class Location : MonoBehaviour
     }
 
     void submit() {
-        robotIcon.enabled = false;
+        robot.enabled = false;
         if(isAuton) 
             Variables.currentLocation.autonCycles.Add(Variables.currentLocation.currentCycle);
         else
@@ -304,7 +327,7 @@ public class Location : MonoBehaviour
         if(defenseTimestamp != 0) {
             Variables.currentLocation.defenseTime += currentTime() - defenseTimestamp;
         }
-        SceneManager.LoadScene("AfterLocation");
+        SceneManager.LoadScene("Endgame");
     }
  
     static int currentTime() {
