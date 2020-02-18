@@ -137,7 +137,7 @@ public class QRGenerator
             ret += convertCycle(cycle);
         }
 
-        ret += data.bricked ? "1" : "0";
+        ret += ensureBits(Math.Min(127, data.brickTime), 7);
         ret += ensureBits(Math.Min(127, data.defenseTime), 7);
 
         ret += data.canSpin ? "1" : "0";

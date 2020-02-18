@@ -26,7 +26,7 @@ public class GamePiecesScouting : MonoBehaviour
     public Button dropsMinus;
     public TextMeshProUGUI dropsText;
 
-    public Toggle canSpinToggle;
+    // public Toggle canSpinToggle;
     public Toggle rotControlToggle;
     public Toggle posControlToggle;
     public Toggle initLineToggle;
@@ -166,7 +166,7 @@ public class GamePiecesScouting : MonoBehaviour
     
     void nextScene() {
         Variables.currentMatch.initLine = initLineToggle.isOn;
-        Variables.currentMatch.canSpin = canSpinToggle.isOn;
+        // Variables.currentMatch.canSpin = canSpinToggle.isOn;
         Variables.currentMatch.rotControl = rotControlToggle.isOn;
         Variables.currentMatch.posControl = posControlToggle.isOn;
 

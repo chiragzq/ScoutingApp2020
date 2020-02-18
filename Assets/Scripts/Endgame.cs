@@ -100,7 +100,7 @@ public class Endgame : MonoBehaviour
             Variables.currentLocation.canSpin = canSpinToggle.isOn;
             Variables.currentLocation.rotControl = rotControlToggle.isOn;
             Variables.currentLocation.posControl = posControlToggle.isOn;
-            Variables.currentLocation.bricked = brickedToggle.isOn;
+            // Variables.currentLocation.bricked = brickedToggle.isOn;
         }
 
         SceneManager.LoadScene("Comments");

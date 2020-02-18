@@ -26,6 +26,7 @@ public class Location : MonoBehaviour
     public Button leftDropsPlus;
     public Button leftDropsMinus;
     public TextMeshProUGUI leftDropsText;
+    public Button leftBricked;
     public Button leftDefense;
     public Button leftAuton;
         public TextMeshProUGUI leftAutonText;
@@ -47,6 +48,7 @@ public class Location : MonoBehaviour
     public Button rightDropsPlus;
     public Button rightDropsMinus;
     public TextMeshProUGUI rightDropsText;
+    public Button rightBricked;
     public Button rightDefense;
     public Button rightAuton;
         public TextMeshProUGUI rightAutonText;
@@ -57,6 +59,7 @@ public class Location : MonoBehaviour
     public bool isAuton;
     public int startTimestamp;
     public int defenseTimestamp;
+    public int brickedTimestamp;
 
     private Vector2 topLeft;
     private Vector2 bottomRight;
@@ -151,6 +154,17 @@ public class Location : MonoBehaviour
                     leftDefense.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
                 }
             });
+
+            leftBricked.onClick.AddListener(() => {
+                 if(brickedTimestamp == 0) {
+                    brickedTimestamp = currentTime();
+                    leftBricked.GetComponent<Image>().color = new Color(60f/255, 9f/255, 128f/255);
+                } else {
+                    Variables.currentLocation.brickTime += currentTime() - brickedTimestamp;
+                    brickedTimestamp = 0;
+                    leftBricked.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
+                }
+            });
         } else {    
             leftControls.SetActive(false);
 
@@ -185,6 +199,17 @@ public class Location : MonoBehaviour
                     Variables.currentLocation.defenseTime += currentTime() - defenseTimestamp;
                     defenseTimestamp = 0;
                     rightDefense.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
+                }
+            });
+
+            rightBricked.onClick.AddListener(() => {
+                 if(brickedTimestamp == 0) {
+                    brickedTimestamp = currentTime();
+                    rightBricked.GetComponent<Image>().color = new Color(60f/255, 9f/255, 128f/255);
+                } else {
+                    Variables.currentLocation.brickTime += currentTime() - brickedTimestamp;
+                    brickedTimestamp = 0;
+                    rightBricked.GetComponent<Image>().color = new Color(103f/255, 15f/255, 219f/255);
                 }
             });
         }
@@ -300,6 +325,7 @@ public class Location : MonoBehaviour
     }
 
     void submit() {
+        if(!robot.enabled) return;
         robot.enabled = false;
         if(isAuton) 
             Variables.currentLocation.autonCycles.Add(Variables.currentLocation.currentCycle);

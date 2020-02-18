@@ -22,7 +22,7 @@ public class Login : MonoBehaviour
     }
 
     void SubmitUsername() {
-        string username = inputField.text;
+        string username = inputField.text.ToLower();
         if(Array.IndexOf(Constants.usernames, username) > -1) {
             Constants.setUsername(username);
             if(Constants.roleIndex == -1)

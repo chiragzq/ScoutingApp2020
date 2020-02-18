@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
 {
     public TextMeshProUGUI versionText;
     public TextMeshProUGUI userText;
+    public TextMeshProUGUI boltmanText;
 
     public TMP_InputField matchNumberInput;
     public TMP_Dropdown teamDropdown;
@@ -17,12 +18,14 @@ public class MainMenu : MonoBehaviour
     public Button leftStartButton;
     public Button rightStartButton;
     public Button rolesButton;
+    public Button logoutButton;
 
     // Start is called before the first frame update
     void Start() {
         leftStartButton.onClick.AddListener(LeftStartRound);
         rightStartButton.onClick.AddListener(RightStartRound);
         rolesButton.onClick.AddListener(ChangeRoles);
+        logoutButton.onClick.AddListener(LogOut);
 
         matchNumberInput.onValueChanged.AddListener(checkMatchNumberInput);
 
@@ -31,6 +34,9 @@ public class MainMenu : MonoBehaviour
         string firstName = Constants.getFirstname();
         firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
         userText.text = "Welcome " + firstName + ", your role is " + Constants.getRoleName() + ".";
+
+        string boltmanQuote = Constants.getBoltmanQuote();
+        boltmanText.text = "\"" + boltmanQuote + "\" --Boltman";
 
         Application.targetFrameRate = 15;
         QualitySettings.vSyncCount = 0;
@@ -100,6 +106,11 @@ public class MainMenu : MonoBehaviour
             Variables.currentLocation.red =  teamDropdown.value < 3;
             SceneManager.LoadScene("Location");
         }
+    }
+
+    void LogOut() {
+        Constants.loggedIn = false;
+        SceneManager.LoadScene("Login");
     }
 
     void ChangeRoles() {
