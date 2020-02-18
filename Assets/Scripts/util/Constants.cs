@@ -13,7 +13,7 @@ using UnityEngine;
 // Boltman
 public class Constants : MonoBehaviour
 {
-    public const string versionString = "Version 1.0.1 (Scouter Training)";
+    public const string versionString = "Version 1.1.2 (Scouter Training)";
 
     // List of usernames who use the app
     public static readonly string[] usernames = {
