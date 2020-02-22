@@ -578,6 +578,7 @@ GameObject:
   - component: {fileID: 96358883}
   - component: {fileID: 96358882}
   - component: {fileID: 96358881}
+  - component: {fileID: 96358884}
   m_Layer: 5
   m_Name: PathsInput
   m_TagString: Untagged
@@ -733,6 +734,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 96358879}
   m_CullTransparentMesh: 0
+--- !u!114 &96358884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96358879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279ef183fdfa4679a1365156edd79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autonStartDropdown: {fileID: 1367716791}
+  autonScoringDropdown: {fileID: 2079572244}
+  defenseDropdown: {fileID: 959270729}
+  pathsInputField: {fileID: 96358881}
+  strategyBackButton: {fileID: 1897977861}
+  strategyNextButton: {fileID: 447055245}
 --- !u!1 &138358572
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Can't play defense
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -816,8 +835,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -857,10 +876,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 138358574}
-    characterCount: 18
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -943,7 +962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -971,8 +990,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1012,7 +1031,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 165255951}
-    characterCount: 1
+    characterCount: 6
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -1571,6 +1590,7 @@ GameObject:
   - component: {fileID: 447055247}
   - component: {fileID: 447055246}
   - component: {fileID: 447055245}
+  - component: {fileID: 447055248}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -1673,6 +1693,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447055243}
   m_CullTransparentMesh: 0
+--- !u!114 &447055248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447055243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279ef183fdfa4679a1365156edd79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autonStartDropdown: {fileID: 1367716791}
+  autonScoringDropdown: {fileID: 2079572244}
+  defenseDropdown: {fileID: 959270729}
+  pathsInputField: {fileID: 96358881}
+  strategyBackButton: {fileID: 1897977861}
+  strategyNextButton: {fileID: 447055245}
 --- !u!1 &447908136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,6 +3170,7 @@ GameObject:
   - component: {fileID: 959270731}
   - component: {fileID: 959270730}
   - component: {fileID: 959270729}
+  - component: {fileID: 959270732}
   m_Layer: 5
   m_Name: DefenseStratDropdown
   m_TagString: Untagged
@@ -3206,6 +3245,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: Can't play defense
       m_Image: {fileID: 0}
     - m_Text: Plays defense only if necessary
@@ -3250,6 +3291,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959270727}
   m_CullTransparentMesh: 0
+--- !u!114 &959270732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959270727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279ef183fdfa4679a1365156edd79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autonStartDropdown: {fileID: 1367716791}
+  autonScoringDropdown: {fileID: 2079572244}
+  defenseDropdown: {fileID: 959270729}
+  pathsInputField: {fileID: 96358881}
+  strategyBackButton: {fileID: 1897977861}
+  strategyNextButton: {fileID: 447055245}
 --- !u!1 &973582554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4255,6 +4314,7 @@ GameObject:
   - component: {fileID: 1367716793}
   - component: {fileID: 1367716792}
   - component: {fileID: 1367716791}
+  - component: {fileID: 1367716794}
   m_Layer: 5
   m_Name: AutonStartDropdown
   m_TagString: Untagged
@@ -4329,6 +4389,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: 1
       m_Image: {fileID: 0}
     - m_Text: 2
@@ -4373,6 +4435,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367716789}
   m_CullTransparentMesh: 0
+--- !u!114 &1367716794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367716789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279ef183fdfa4679a1365156edd79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autonStartDropdown: {fileID: 1367716791}
+  autonScoringDropdown: {fileID: 2079572244}
+  defenseDropdown: {fileID: 959270729}
+  pathsInputField: {fileID: 96358881}
+  strategyBackButton: {fileID: 1897977861}
+  strategyNextButton: {fileID: 447055245}
 --- !u!1 &1384411595
 GameObject:
   m_ObjectHideFlags: 0
@@ -5088,7 +5168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5116,8 +5196,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5157,7 +5237,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1679984826}
-    characterCount: 1
+    characterCount: 6
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -5670,6 +5750,7 @@ GameObject:
   - component: {fileID: 1897977863}
   - component: {fileID: 1897977862}
   - component: {fileID: 1897977861}
+  - component: {fileID: 1897977864}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -5772,6 +5853,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897977859}
   m_CullTransparentMesh: 0
+--- !u!114 &1897977864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897977859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279ef183fdfa4679a1365156edd79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autonStartDropdown: {fileID: 1367716791}
+  autonScoringDropdown: {fileID: 2079572244}
+  defenseDropdown: {fileID: 959270729}
+  pathsInputField: {fileID: 96358881}
+  strategyBackButton: {fileID: 1897977861}
+  strategyNextButton: {fileID: 447055245}
 --- !u!1 &1946725471
 GameObject:
   m_ObjectHideFlags: 0
@@ -6238,6 +6337,7 @@ GameObject:
   - component: {fileID: 2079572246}
   - component: {fileID: 2079572245}
   - component: {fileID: 2079572244}
+  - component: {fileID: 2079572247}
   m_Layer: 5
   m_Name: AutonScoreDropdown
   m_TagString: Untagged
@@ -6312,6 +6412,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: 1
       m_Image: {fileID: 0}
     - m_Text: 2
@@ -6370,6 +6472,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079572242}
   m_CullTransparentMesh: 0
+--- !u!114 &2079572247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079572242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1279ef183fdfa4679a1365156edd79df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autonStartDropdown: {fileID: 1367716791}
+  autonScoringDropdown: {fileID: 2079572244}
+  defenseDropdown: {fileID: 959270729}
+  pathsInputField: {fileID: 96358881}
+  strategyBackButton: {fileID: 1897977861}
+  strategyNextButton: {fileID: 447055245}
 --- !u!1 &2110541589
 GameObject:
   m_ObjectHideFlags: 0

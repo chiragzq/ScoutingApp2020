@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 340264698}
   - component: {fileID: 340264697}
   - component: {fileID: 340264696}
+  - component: {fileID: 340264699}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -417,6 +418,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340264694}
   m_CullTransparentMesh: 0
+--- !u!114 &340264699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340264694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f79fef4ec4ebdb00fee87986c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalsDropdown: {fileID: 1789037655}
+  climbDropdown: {fileID: 2031903126}
+  wheelSpinDropdown: {fileID: 1532138175}
+  scoringBackButton: {fileID: 614853036}
+  scoringNextButton: {fileID: 340264696}
 --- !u!1 &368633141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1185,7 @@ GameObject:
   - component: {fileID: 614853038}
   - component: {fileID: 614853037}
   - component: {fileID: 614853036}
+  - component: {fileID: 614853039}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1269,6 +1288,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614853034}
   m_CullTransparentMesh: 0
+--- !u!114 &614853039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614853034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f79fef4ec4ebdb00fee87986c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalsDropdown: {fileID: 1789037655}
+  climbDropdown: {fileID: 2031903126}
+  wheelSpinDropdown: {fileID: 1532138175}
+  scoringBackButton: {fileID: 614853036}
+  scoringNextButton: {fileID: 340264696}
 --- !u!1 &655601697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1985,7 +2021,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Can't spin
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2013,8 +2049,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2054,10 +2090,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 991551223}
-    characterCount: 10
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -2472,7 +2508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Only lower
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2500,8 +2536,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2541,10 +2577,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1101429654}
-    characterCount: 10
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -3099,6 +3135,7 @@ GameObject:
   - component: {fileID: 1532138177}
   - component: {fileID: 1532138176}
   - component: {fileID: 1532138175}
+  - component: {fileID: 1532138178}
   m_Layer: 5
   m_Name: ColorSpinDropdown
   m_TagString: Untagged
@@ -3173,6 +3210,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: Can't spin
       m_Image: {fileID: 0}
     - m_Text: Spin with color control
@@ -3219,6 +3258,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532138173}
   m_CullTransparentMesh: 0
+--- !u!114 &1532138178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532138173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f79fef4ec4ebdb00fee87986c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalsDropdown: {fileID: 1789037655}
+  climbDropdown: {fileID: 2031903126}
+  wheelSpinDropdown: {fileID: 1532138175}
+  scoringBackButton: {fileID: 614853036}
+  scoringNextButton: {fileID: 340264696}
 --- !u!1 &1533979046
 GameObject:
   m_ObjectHideFlags: 0
@@ -4150,6 +4206,7 @@ GameObject:
   - component: {fileID: 1789037657}
   - component: {fileID: 1789037656}
   - component: {fileID: 1789037655}
+  - component: {fileID: 1789037658}
   m_Layer: 5
   m_Name: GoalDropdown
   m_TagString: Untagged
@@ -4224,6 +4281,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: Only lower
       m_Image: {fileID: 0}
     - m_Text: Lower and outer
@@ -4270,6 +4329,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1789037653}
   m_CullTransparentMesh: 0
+--- !u!114 &1789037658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789037653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f79fef4ec4ebdb00fee87986c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalsDropdown: {fileID: 1789037655}
+  climbDropdown: {fileID: 2031903126}
+  wheelSpinDropdown: {fileID: 1532138175}
+  scoringBackButton: {fileID: 614853036}
+  scoringNextButton: {fileID: 340264696}
 --- !u!1 &1849975500
 GameObject:
   m_ObjectHideFlags: 0
@@ -4686,7 +4762,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Can't climb
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4714,8 +4790,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4755,10 +4831,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1942840361}
-    characterCount: 11
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -5035,8 +5111,9 @@ GameObject:
   - component: {fileID: 2031903128}
   - component: {fileID: 2031903127}
   - component: {fileID: 2031903126}
+  - component: {fileID: 2031903129}
   m_Layer: 5
-  m_Name: EndgameDropdown
+  m_Name: ClimbDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5109,6 +5186,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: Can't climb
       m_Image: {fileID: 0}
     - m_Text: Can climb only with assist
@@ -5155,6 +5234,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031903124}
   m_CullTransparentMesh: 0
+--- !u!114 &2031903129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031903124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ab1f79fef4ec4ebdb00fee87986c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goalsDropdown: {fileID: 1789037655}
+  climbDropdown: {fileID: 2031903126}
+  wheelSpinDropdown: {fileID: 1532138175}
+  scoringBackButton: {fileID: 614853036}
+  scoringNextButton: {fileID: 340264696}
 --- !u!1 &2058653368
 GameObject:
   m_ObjectHideFlags: 0

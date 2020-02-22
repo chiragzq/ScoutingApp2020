@@ -1,0 +1,71 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class Comments : MonoBehaviour
+{
+    //input fields to get scouter comments on robot
+    public TMPro.TMP_InputField strengthsInputField;
+    public TMPro.TMP_InputField weaknessesInputField;
+    public TMPro.TMP_InputField generalCommentsInputField;
+
+    //buttons to exit scene
+    public Button CommentsBackButton;
+    public Button CommentsNextButton;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //adds listeners to the input fields to get comments about strengths, weaknesses, and general observations
+        strengthsInputField.onEndEdit.AddListener(delegate {StrengthsCommentsChanged();});
+        weaknessesInputField.onEndEdit.AddListener(delegate {WeaknessesCommentsChanged();});
+        generalCommentsInputField.onValueChanged.AddListener(delegate {GeneralCommentsChanged();});
+
+        //adds listeners to the buttons to exit the scene
+        CommentsBackButton.onClick.AddListener(delegate {LoadReliabilityScene();});
+        CommentsNextButton.onClick.AddListener(delegate {LoadEndScene();});
+    }
+
+    //changes values of the strings containing scouter comments
+    public void StrengthsCommentsChanged() {
+        Data.teamData.strengthsComments = strengthsInputField.text;
+    }
+    public void WeaknessesCommentsChanged() {
+        Data.teamData.weaknessesComments = weaknessesInputField.text;
+    }
+    public void GeneralCommentsChanged() {
+        Data.teamData.generalComments = generalCommentsInputField.text;
+    }
+
+    //load different scenes
+    public void LoadReliabilityScene() {
+        SceneManager.LoadScene("Reliability");
+    }
+    public void LoadEndScene() {
+        SceneManager.LoadScene("End");
+        Debug.Log (Data.teamData.teamNumber);
+        Debug.Log (Data.teamData.roboHeight);
+        Debug.Log (Data.teamData.roboWeight);
+        Debug.Log (Data.teamData.roboDrivetrain);
+        Debug.Log (Data.teamData.canScoreGoals);
+        Debug.Log (Data.teamData.canClimb);
+        Debug.Log (Data.teamData.canWheelSpin);
+        Debug.Log (Data.teamData.autonStartWithBalls);
+        Debug.Log (Data.teamData.autonScoreBalls);
+        Debug.Log (Data.teamData.defenseStrat);
+        Debug.Log (Data.teamData.pathStrat);
+        Debug.Log (Data.teamData.roboStability);
+        Debug.Log (Data.teamData.roboRobustness);
+        Debug.Log (Data.teamData.strengthsComments);
+        Debug.Log (Data.teamData.weaknessesComments);
+        Debug.Log (Data.teamData.generalComments);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}

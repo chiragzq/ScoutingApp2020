@@ -642,6 +642,7 @@ GameObject:
   - component: {fileID: 194705106}
   - component: {fileID: 194705105}
   - component: {fileID: 194705104}
+  - component: {fileID: 194705107}
   m_Layer: 5
   m_Name: RobustnessDropdown
   m_TagString: Untagged
@@ -716,6 +717,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: Very likely to break or brick
       m_Image: {fileID: 0}
     - m_Text: Sometimes breaks or bricks
@@ -760,6 +763,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194705102}
   m_CullTransparentMesh: 0
+--- !u!114 &194705107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194705102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51444f3f2515465090ba8704a0d2969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stabilityDropdown: {fileID: 624299459}
+  robustnessDropdown: {fileID: 194705104}
+  reliabilityBackButton: {fileID: 1496203582}
+  reliabilityNextButton: {fileID: 1060381193}
 --- !u!1 &195664347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1361,7 @@ GameObject:
   - component: {fileID: 624299461}
   - component: {fileID: 624299460}
   - component: {fileID: 624299459}
+  - component: {fileID: 624299462}
   m_Layer: 5
   m_Name: StabilityDropdown
   m_TagString: Untagged
@@ -1416,6 +1436,8 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
+    - m_Text: select
+      m_Image: {fileID: 0}
     - m_Text: Very likely to tip or fall
       m_Image: {fileID: 0}
     - m_Text: Sometimes tips or falls
@@ -1460,6 +1482,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624299457}
   m_CullTransparentMesh: 0
+--- !u!114 &624299462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 624299457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51444f3f2515465090ba8704a0d2969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stabilityDropdown: {fileID: 624299459}
+  robustnessDropdown: {fileID: 194705104}
+  reliabilityBackButton: {fileID: 1496203582}
+  reliabilityNextButton: {fileID: 1060381193}
 --- !u!1 &728739841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,7 +1553,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Very likely to tip or fall
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1543,8 +1581,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1584,10 +1622,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 728739843}
-    characterCount: 26
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 6
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1745,6 +1783,7 @@ GameObject:
   - component: {fileID: 1060381195}
   - component: {fileID: 1060381194}
   - component: {fileID: 1060381193}
+  - component: {fileID: 1060381196}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -1847,6 +1886,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1060381191}
   m_CullTransparentMesh: 0
+--- !u!114 &1060381196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060381191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51444f3f2515465090ba8704a0d2969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stabilityDropdown: {fileID: 624299459}
+  robustnessDropdown: {fileID: 194705104}
+  reliabilityBackButton: {fileID: 1496203582}
+  reliabilityNextButton: {fileID: 1060381193}
 --- !u!1 &1074788939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,6 +2796,7 @@ GameObject:
   - component: {fileID: 1496203584}
   - component: {fileID: 1496203583}
   - component: {fileID: 1496203582}
+  - component: {fileID: 1496203585}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -2843,6 +2899,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496203580}
   m_CullTransparentMesh: 0
+--- !u!114 &1496203585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496203580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51444f3f2515465090ba8704a0d2969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stabilityDropdown: {fileID: 624299459}
+  robustnessDropdown: {fileID: 194705104}
+  reliabilityBackButton: {fileID: 1496203582}
+  reliabilityNextButton: {fileID: 1060381193}
 --- !u!1 &1500046456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,7 +2970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Very likely to break or brick
+  m_text: select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2926,8 +2998,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2967,10 +3039,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1500046458}
-    characterCount: 29
+    characterCount: 6
     spriteCount: 0
-    spaceCount: 5
-    wordCount: 6
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
