@@ -18,7 +18,7 @@ public class Scoring : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //adds listeners to the dropdowns to get values for goal scoring, endgame climb, and color wheel spin capabilities
+        //adds listeners to the dropdowns to get values  for goal scoring, endgame climb, and color wheel spin capabilities
         goalsDropdown.onValueChanged.AddListener(delegate {GoalsChanged();});    
         climbDropdown.onValueChanged.AddListener(delegate {ClimbChanged();});  
         wheelSpinDropdown.onValueChanged.AddListener(delegate {WheelControlChanged();});  

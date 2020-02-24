@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Reliability : MonoBehaviour
 {
-    //dropdown menus to get info about stability and robustness of robot
+    //dropdown menus to get info about stability and robustness  of robot
     public TMPro.TMP_Dropdown stabilityDropdown;
     public TMPro.TMP_Dropdown robustnessDropdown;
 

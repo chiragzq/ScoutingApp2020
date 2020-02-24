@@ -15,7 +15,7 @@ public class Team : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //adds a listener to the input field to read team number
+        //adds a listener to the input field  to read team number
         teamNumberInputField.onEndEdit.AddListener(delegate {TeamNumberChanged();});
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Comments : MonoBehaviour
 {
-    //input fields to get scouter comments on robot
+    //input fields to get scouter comments on  robot
     public TMPro.TMP_InputField strengthsInputField;
     public TMPro.TMP_InputField weaknessesInputField;
     public TMPro.TMP_InputField generalCommentsInputField;

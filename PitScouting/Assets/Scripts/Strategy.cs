@@ -16,7 +16,7 @@ public class Strategy : MonoBehaviour
     public Button strategyBackButton;
     public Button strategyNextButton;
 
-    // Start is called before the first frame update
+    // Start is called before the first frame  update
     void Start()
     {
         //adds listeners to the dropdowns and  input  field to get info for

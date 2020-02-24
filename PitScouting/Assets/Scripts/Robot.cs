@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Robot : MonoBehaviour
 {
-    //input fields and dropdown menus to get robot info
+    //input fields and dropdown menus to  get robot info
     public TMPro.TMP_InputField heightInputField;
     public TMPro.TMP_InputField weightInputField;
     public TMPro.TMP_Dropdown drivetrainDropdown;
