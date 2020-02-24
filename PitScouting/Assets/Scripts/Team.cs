@@ -17,14 +17,16 @@ public class Team : MonoBehaviour
     {
         //adds a listener to the input field to read team number
         teamNumberInputField.onEndEdit.AddListener(delegate {TeamNumberChanged();});
-
-        //adds a listener to the button to exit the scene
-        teamNextButton.onClick.AddListener(delegate {LoadRobotScene();});
     }
 
     //changes the team number
     public void TeamNumberChanged() {
-        Data.teamData.teamNumber = int.Parse(teamNumberInputField.text);
+        int teamNumberInput;
+        if (int.TryParse(teamNumberInputField.text, out teamNumberInput))
+        {
+            Data.teamData.teamNumber = teamNumberInput;
+            teamNextButton.onClick.AddListener(delegate {LoadRobotScene();});  //adds a listener to the button to exit the scene
+        }
     }
 
     //loads a different scene

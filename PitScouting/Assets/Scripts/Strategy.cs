@@ -29,17 +29,18 @@ public class Strategy : MonoBehaviour
         //the team's path strat
         pathsInputField.onEndEdit.AddListener(delegate {PathStratChanged();});
 
-        //adds listeners to the buttons to exit the scene
+        //adds a listener to the button to go to previous scene
         strategyBackButton.onClick.AddListener(delegate {LoadScoringScene();});
-        strategyNextButton.onClick.AddListener(delegate {LoadReliabilityScene();});
     }
 
     //change the info for auton start, scoring, defense, and  paths
     public void AutonStartChanged() {
         Data.teamData.autonStartWithBalls = autonStartDropdown.value;
+        CheckIfCompleted();
     }
     public void AutonScoringChanged() {
         Data.teamData.autonScoreBalls = autonScoringDropdown.value;
+        CheckIfCompleted();
     }
     public void DefenseStratChanged() {
         if (defenseDropdown.value == 1) {
@@ -51,10 +52,24 @@ public class Strategy : MonoBehaviour
         if (defenseDropdown.value == 3) {
             Data.teamData.defenseStrat = "only plays defense";
         }
-        //Data.teamData.defenseStrat = defenseDropdown.text;
+        CheckIfCompleted();
     }
     public void PathStratChanged() {
         Data.teamData.pathStrat = pathsInputField.text;
+        CheckIfCompleted();
+    }
+
+    //checks if all data has been entered correctly, then adds listener to button to go to next scene
+    public void CheckIfCompleted() {
+        if (autonStartDropdown.value != 0) {
+            if (autonScoringDropdown.value != 0) {
+                if (defenseDropdown.value != 0) {
+                    if (!string.IsNullOrEmpty(pathsInputField.text)) {
+                        strategyNextButton.onClick.AddListener(delegate {LoadReliabilityScene();});
+                    }
+                }
+            }
+        }
     }
 
     //load different scenes

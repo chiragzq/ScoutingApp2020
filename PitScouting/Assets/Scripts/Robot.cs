@@ -15,6 +15,10 @@ public class Robot : MonoBehaviour
     public Button robotBackButton;
     public Button robotNextButton;
 
+    //integer input read from the input fields
+    double heightInput;
+    double weightInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,17 +27,23 @@ public class Robot : MonoBehaviour
         weightInputField.onEndEdit.AddListener(delegate {WeightChanged();});  
         drivetrainDropdown.onValueChanged.AddListener(delegate {DrivetrainChanged();});
         
-        //adds listeners to the buttons to exit the scene
+        //adds a listener to the button to go to previous scene
         robotBackButton.onClick.AddListener(delegate {LoadTeamScene();});
-        robotNextButton.onClick.AddListener(delegate {LoadScoringScene();});
+        
     }
 
     //change the values of robot height, weight, and drivetrain
     public void HeightChanged() {
-        Data.teamData.roboHeight = float.Parse(heightInputField.text);
+        if (double.TryParse(heightInputField.text, out heightInput)) {
+            Data.teamData.roboHeight = heightInput;
+            CheckIfCompleted();
+        }
     }
     public void WeightChanged() {
-        Data.teamData.roboWeight = float.Parse(weightInputField.text);
+        if (double.TryParse(weightInputField.text, out weightInput)) {
+            Data.teamData.roboWeight = weightInput;
+            CheckIfCompleted();
+        }
     }
     public void DrivetrainChanged() {
         if (drivetrainDropdown.value == 1) {
@@ -45,7 +55,18 @@ public class Robot : MonoBehaviour
         if (drivetrainDropdown.value == 3) {
             Data.teamData.roboDrivetrain = "Tank Drive";
         }
-        //Data.teamData.roboDrivetrain = drivetrainDropdown.text;
+        CheckIfCompleted();
+    }
+
+    //checks if all data has been entered correctly, then adds listener to button to go to next scene
+    public void CheckIfCompleted() {
+        if (heightInput != 0) {
+            if (weightInput != 0) {
+                if (drivetrainDropdown.value != 0) {
+                    robotNextButton.onClick.AddListener(delegate {LoadScoringScene();});
+                }
+            }
+        }
     }
 
     //load different scenes

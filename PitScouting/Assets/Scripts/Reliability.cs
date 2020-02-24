@@ -21,9 +21,8 @@ public class Reliability : MonoBehaviour
         stabilityDropdown.onValueChanged.AddListener(delegate {StabilityValueChanged();});  
         robustnessDropdown.onValueChanged.AddListener(delegate{RobustnessValueChanged();});
 
-        //adds listeners to the buttons to exit the scene
+        //adds a listener to the button to go to previous scene
         reliabilityBackButton.onClick.AddListener(delegate {LoadStrategyScene();});
-        reliabilityNextButton.onClick.AddListener(delegate {LoadCommentsScene();});
     }
 
     //change the values for stability and robustness
@@ -37,7 +36,7 @@ public class Reliability : MonoBehaviour
         if (stabilityDropdown.value == 3) {
             Data.teamData.roboStability = "almost/never tips or falls";
         }
-        //Data.teamData.roboStability = stabilityDropdown.text;
+        CheckIfCompleted();
     }
     public void RobustnessValueChanged() {
         if (robustnessDropdown.value == 1) {
@@ -49,7 +48,16 @@ public class Reliability : MonoBehaviour
         if (robustnessDropdown.value == 3) {
             Data.teamData.roboRobustness = "almost/never breaks or bricks";
         }
-        //Data.teamData.roboRobustness = robustnessDropdown.text;
+        CheckIfCompleted();
+    }
+
+    //checks if all data has been entered correctly, then adds listener to button to go to next scene
+    public void CheckIfCompleted() {
+        if (stabilityDropdown.value != 0) {
+            if (robustnessDropdown.value != 0) {
+                reliabilityNextButton.onClick.AddListener(delegate {LoadCommentsScene();});
+            }
+        }
     }
 
     //load different scenes

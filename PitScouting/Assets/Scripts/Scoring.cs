@@ -23,9 +23,8 @@ public class Scoring : MonoBehaviour
         climbDropdown.onValueChanged.AddListener(delegate {ClimbChanged();});  
         wheelSpinDropdown.onValueChanged.AddListener(delegate {WheelControlChanged();});  
 
-        //adds listeners to the buttons to exit the scene
+        //adds a listener to the button to go to previous scene
         scoringBackButton.onClick.AddListener(delegate {LoadRobotScene();});
-        scoringNextButton.onClick.AddListener(delegate {LoadStrategyScene();});
     }
 
     //change the values of goal scoring, endgame climb, and color wheel spin capabilities
@@ -42,7 +41,7 @@ public class Scoring : MonoBehaviour
         if (goalsDropdown.value == 4) {
             Data.teamData.canScoreGoals = "all three";
         }
-        //Data.teamData.canScoreGoals = goalsDropdown.text;
+        CheckIfCompleted();
     }
 
     public void ClimbChanged() {
@@ -58,7 +57,7 @@ public class Scoring : MonoBehaviour
         if (climbDropdown.value == 4) {
             Data.teamData.canClimb = "can climb and assist others";
         }
-        //Data.teamData.canClimb = climbDropdown.text;
+        CheckIfCompleted();
     }
     public void WheelControlChanged() {
         if (wheelSpinDropdown.value == 1) {
@@ -73,7 +72,18 @@ public class Scoring : MonoBehaviour
         if (wheelSpinDropdown.value == 4) {
             Data.teamData.canWheelSpin = "can spin with color and count control";
         }
-        //Data.teamData.canWheelSpin = wheelSpinDropdown.text;
+        CheckIfCompleted();
+    }
+
+    //checks if all data has been entered correctly, then adds listener to button to go to next scene
+    public void CheckIfCompleted() {
+        if (goalsDropdown.value != 0) {
+            if (climbDropdown.value != 0) {
+                if  (wheelSpinDropdown.value != 0) {
+                    scoringNextButton.onClick.AddListener(delegate {LoadStrategyScene();});
+                }
+            }
+        }
     }
 
     //load different scenes

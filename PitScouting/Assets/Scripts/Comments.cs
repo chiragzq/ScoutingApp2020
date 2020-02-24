@@ -45,22 +45,6 @@ public class Comments : MonoBehaviour
     }
     public void LoadEndScene() {
         SceneManager.LoadScene("End");
-        Debug.Log (Data.teamData.teamNumber);
-        Debug.Log (Data.teamData.roboHeight);
-        Debug.Log (Data.teamData.roboWeight);
-        Debug.Log (Data.teamData.roboDrivetrain);
-        Debug.Log (Data.teamData.canScoreGoals);
-        Debug.Log (Data.teamData.canClimb);
-        Debug.Log (Data.teamData.canWheelSpin);
-        Debug.Log (Data.teamData.autonStartWithBalls);
-        Debug.Log (Data.teamData.autonScoreBalls);
-        Debug.Log (Data.teamData.defenseStrat);
-        Debug.Log (Data.teamData.pathStrat);
-        Debug.Log (Data.teamData.roboStability);
-        Debug.Log (Data.teamData.roboRobustness);
-        Debug.Log (Data.teamData.strengthsComments);
-        Debug.Log (Data.teamData.weaknessesComments);
-        Debug.Log (Data.teamData.generalComments);
     }
 
     // Update is called once per frame
