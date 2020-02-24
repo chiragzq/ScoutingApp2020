@@ -10,27 +10,36 @@ public class MainMenu : MonoBehaviour
 {
     public TextMeshProUGUI versionText;
     public TextMeshProUGUI userText;
+    public TextMeshProUGUI boltmanText;
 
     public TMP_InputField matchNumberInput;
     public TMP_Dropdown teamDropdown;
 
-    public Button startButton;
-    public Button recordsButton;
+    public Button leftStartButton;
+    public Button rightStartButton;
     public Button rolesButton;
+    public Button logoutButton;
 
     // Start is called before the first frame update
     void Start() {
-        startButton.onClick.AddListener(StartRound);
-        recordsButton.onClick.AddListener(OpenRecords);
+        leftStartButton.onClick.AddListener(LeftStartRound);
+        rightStartButton.onClick.AddListener(RightStartRound);
         rolesButton.onClick.AddListener(ChangeRoles);
+        logoutButton.onClick.AddListener(LogOut);
 
         matchNumberInput.onValueChanged.AddListener(checkMatchNumberInput);
 
         versionText.text = Constants.versionString;
         
-        string firstName = Constants.username.Substring(2, Constants.username.Length - 3);
+        string firstName = Constants.getFirstname();
         firstName = char.ToUpper(firstName[0]) + firstName.Substring(1);
         userText.text = "Welcome " + firstName + ", your role is " + Constants.getRoleName() + ".";
+
+        string boltmanQuote = Constants.getBoltmanQuote();
+        boltmanText.text = "\"" + boltmanQuote + "\" --Boltman";
+
+        Application.targetFrameRate = 15;
+        QualitySettings.vSyncCount = 0;
     }
 
     void checkMatchNumberInput(string value) {
@@ -48,26 +57,60 @@ public class MainMenu : MonoBehaviour
             teamDropdown.ClearOptions();
             teamDropdown.AddOptions(teamOptions);
             teamDropdown.interactable = true;
-            startButton.interactable = true;
+            leftStartButton.interactable = true;
+            rightStartButton.interactable = true;
 
-            Variables.currentMatch = new MatchData();
-            Variables.currentMatch.matchNumber = matchNumber;
+            if(Constants.roleIndex == 0) {
+                Variables.currentMatch = new MatchData();
+                Variables.currentMatch.matchNumber = matchNumber + 1;
+            } else {
+                Variables.currentLocation = new LocationData();
+                Variables.currentLocation.matchNumber = matchNumber + 1;
+            }
         } else {
             teamDropdown.ClearOptions();
             teamDropdown.interactable = false;
-            startButton.interactable = false;
+            
+            leftStartButton.interactable = false;
+            rightStartButton.interactable = false;
         }
     }
 
-    void StartRound() {
-        Variables.currentMatch.teamIndex = teamDropdown.value;
-        Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-        Variables.currentMatch.red =  teamDropdown.value < 3;
-        // SceneManager.LoadScene("GamePieces")
+    void LeftStartRound() {
+        if(Constants.roleIndex == 0) {
+            Variables.currentMatch.side = false;
+            Variables.currentMatch.teamIndex = teamDropdown.value;
+            Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentMatch.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("GamePieces");
+        } else if(Constants.roleIndex == 1) {
+            Variables.currentLocation.side = false;
+            Variables.currentLocation.teamIndex = teamDropdown.value;
+            Variables.currentLocation.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentLocation.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("Location");
+        }
     }
 
-    void OpenRecords() {
-        // TODO
+    void RightStartRound() {
+        if(Constants.roleIndex == 0) {
+            Variables.currentMatch.side = true;
+            Variables.currentMatch.teamIndex = teamDropdown.value;
+            Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentMatch.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("GamePieces");
+        } else if(Constants.roleIndex == 1) {
+            Variables.currentLocation.side = true;
+            Variables.currentLocation.teamIndex = teamDropdown.value;
+            Variables.currentLocation.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
+            Variables.currentLocation.red =  teamDropdown.value < 3;
+            SceneManager.LoadScene("Location");
+        }
+    }
+
+    void LogOut() {
+        Constants.loggedIn = false;
+        SceneManager.LoadScene("Login");
     }
 
     void ChangeRoles() {

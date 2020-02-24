@@ -11,8 +11,7 @@ public class Login : MonoBehaviour
     public Button submitButton;
     public TMP_InputField inputField;
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         if(Constants.loggedIn) {
             if(Constants.roleIndex == -1)
                 SceneManager.LoadScene("RoleSelection");
@@ -23,7 +22,7 @@ public class Login : MonoBehaviour
     }
 
     void SubmitUsername() {
-        string username = inputField.text;
+        string username = inputField.text.ToLower();
         if(Array.IndexOf(Constants.usernames, username) > -1) {
             Constants.setUsername(username);
             if(Constants.roleIndex == -1)
