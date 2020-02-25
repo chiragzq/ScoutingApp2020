@@ -47,13 +47,19 @@ public class Robot : MonoBehaviour
     }
     public void DrivetrainChanged() {
         if (drivetrainDropdown.value == 1) {
-            Data.teamData.roboDrivetrain = "West Coast Drive";
+            Data.teamData.roboDrivetrain = "West Coast or Tank Drive";
         }
         if (drivetrainDropdown.value == 2) {
             Data.teamData.roboDrivetrain = "Swerve Drive";
         }
         if (drivetrainDropdown.value == 3) {
-            Data.teamData.roboDrivetrain = "Tank Drive";
+            Data.teamData.roboDrivetrain = "Mecanum";
+        }
+        if (drivetrainDropdown.value == 4) {
+            Data.teamData.roboDrivetrain = "H Drive";
+        }
+        if (drivetrainDropdown.value == 5) {
+            Data.teamData.roboDrivetrain = "Other";
         }
         CheckIfCompleted();
     }
