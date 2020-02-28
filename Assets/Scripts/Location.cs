@@ -100,25 +100,24 @@ public class Location : MonoBehaviour
         robot.enabled = false;
 
         float xRot = 0, yRot = 0;
-
-        if(Variables.currentLocation.side)
+        if(!Variables.currentLocation.side)
             flipY = !flipY;
         if(Constants.flipLocation)
             flipY = !flipY;
-        if(!Variables.currentLocation.red ^ Variables.currentLocation.side)
+        if(!(Variables.currentLocation.red ^ Variables.currentLocation.side))
             flipY = !flipY;
         
-        if(!Variables.currentLocation.red ^ Variables.currentLocation.side) 
+        if(!(Variables.currentLocation.red ^ Variables.currentLocation.side))
             yRot = 180;
         if(Constants.flipLocation) 
             xRot = 180;
 
         field.transform.localRotation = Quaternion.Euler(xRot, yRot, 0);
-        if(Variables.currentLocation.side) 
+        if(!Variables.currentLocation.side) 
             grid.transform.localRotation = Quaternion.Euler(0, 180, 0);
 
         // Variables.currentLocation.side = false;
-        if(Variables.currentLocation.side) {
+        if(!Variables.currentLocation.side) {
             rightControls.SetActive(false);
 
             leftInnerPlus.onClick.AddListener(innerPlusHandler);
@@ -219,7 +218,7 @@ public class Location : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Variables.currentLocation.side) {
+        if(!Variables.currentLocation.side) {
             leftInnerText.text = Variables.currentLocation.currentCycle.inner + "";
             leftOuterText.text = Variables.currentLocation.currentCycle.outer + "";
             leftLowerText.text = Variables.currentLocation.currentCycle.lower + "";
@@ -248,7 +247,7 @@ public class Location : MonoBehaviour
         x *= 1 / _ratio;
         y *= 1 / _ratio;
         if(x >= 0 && y >= 0) {
-            if(Variables.currentLocation.side) {
+            if(!Variables.currentLocation.side) {
                 x = canvas.GetComponent<RectTransform>().rect.width - x;   
             } 
             x -= topLeft.x;
@@ -275,7 +274,7 @@ public class Location : MonoBehaviour
         Vector3 cellCenter;
         if(flipY)
             cellY = gridHeight - cellY - 1;
-        if(Variables.currentLocation.side) {
+        if(!Variables.currentLocation.side) {
             cellCenter = new Vector3(canvas.GetComponent<RectTransform>().rect.width - (cellX + 0.5f) * cellSize - topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;
         } else {
             cellCenter = new Vector3((cellX + 0.5f) * cellSize + topLeft.x, (cellY + 0.5f) * cellSize + bottomRight.y / 1.1f, 10f) * canvas.scaleFactor;

@@ -81,13 +81,13 @@ public class MainMenu : MonoBehaviour
             Variables.currentMatch.side = false;
             Variables.currentMatch.teamIndex = teamDropdown.value;
             Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-            Variables.currentMatch.red =  teamDropdown.value < 3;
+            Variables.currentMatch.red =  teamDropdown.value >= 3;
             SceneManager.LoadScene("GamePieces");
         } else if(Constants.roleIndex == 1) {
             Variables.currentLocation.side = false;
             Variables.currentLocation.teamIndex = teamDropdown.value;
             Variables.currentLocation.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-            Variables.currentLocation.red =  teamDropdown.value < 3;
+            Variables.currentLocation.red =  teamDropdown.value >= 3;
             SceneManager.LoadScene("Location");
         }
     }
@@ -97,13 +97,13 @@ public class MainMenu : MonoBehaviour
             Variables.currentMatch.side = true;
             Variables.currentMatch.teamIndex = teamDropdown.value;
             Variables.currentMatch.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-            Variables.currentMatch.red =  teamDropdown.value < 3;
+            Variables.currentMatch.red =  teamDropdown.value >= 3;
             SceneManager.LoadScene("GamePieces");
         } else if(Constants.roleIndex == 1) {
             Variables.currentLocation.side = true;
             Variables.currentLocation.teamIndex = teamDropdown.value;
             Variables.currentLocation.teamNumber = Int32.Parse(teamDropdown.options[teamDropdown.value].text);
-            Variables.currentLocation.red =  teamDropdown.value < 3;
+            Variables.currentLocation.red =  teamDropdown.value >= 3;
             SceneManager.LoadScene("Location");
         }
     }
