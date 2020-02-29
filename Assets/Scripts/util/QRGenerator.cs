@@ -63,12 +63,15 @@ public class QRGenerator
         return texture;
     }
 
-    // Converts a string of 0s and 1s to their ascii equivalent
+    // Converts a string of 0s and 1s to their ascizi equivalent
     public static string getByteString(string binaryString) {
         var list = new List<Byte>();
         Debug.Log(binaryString);
         for (int i = 0; i < binaryString.Length; i += 8) {
           String t = binaryString.Substring(i, Math.Min(8, binaryString.Length - i));
+          while(t.Length < 8) {
+              t += '0';
+          }
           list.Add(Convert.ToByte(t, 2));
         }  
         return Encoding.ASCII.GetString(list.ToArray());
@@ -182,7 +185,7 @@ public class QRGenerator
         string ret = "";
         foreach(char s in text) {
             // string s2 = new string(s);
-            if(charMap.ContainsKey(s.ToString())) {
+            if(charMap.ContainsKey(s.ToString()) && s != '%') {
                 ret += charMap[s.ToString()];
             }
         }
