@@ -10,4 +10,6 @@ public class Variables : MonoBehaviour
 
     // The current location data
     public static LocationData currentLocation = new LocationData();
+
+    public static bool fetchedMatches = false;
 }

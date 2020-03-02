@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 using TMPro;
 
 public class MainMenu : MonoBehaviour
@@ -40,6 +42,50 @@ public class MainMenu : MonoBehaviour
 
         Application.targetFrameRate = 15;
         QualitySettings.vSyncCount = 0;
+
+        populateMatches();
+        if(!Variables.fetchedMatches) {
+            Variables.fetchedMatches = true;
+            StartCoroutine(refreshMatches());
+        }
+    }
+
+    IEnumerator refreshMatches() {
+        using (UnityWebRequest request = UnityWebRequest.Get("http://chiragzq.github.io/schedule/"))
+        // using (UnityWebRequest request = UnityWebRequest.Get("http://localhost"))
+        {
+            yield return request.Send();
+
+            if (request.isError) // Error
+            {
+                Debug.Log(request.error);
+            }
+            else // Success
+            {
+                string path = "Assets/Resources/matches.txt";
+
+                StreamWriter writer = new StreamWriter(path, false);
+                writer.WriteLine(request.downloadHandler.text);
+                writer.Close();
+                populateMatches();
+            }
+        }
+    }
+
+    void populateMatches() {
+        string path = "Assets/Resources/matches.txt";
+
+        StreamReader reader = new StreamReader(path); 
+
+        string[] teams = reader.ReadToEnd().Split(' ');
+        Constants.matchTeams = new int[teams.Length / 6][];
+        for(int i = 0;i < teams.Length;i ++) {
+            int teamNumber = Int32.Parse(teams[i]);
+            if(i % 6 == 0)
+                Constants.matchTeams[i / 6] = new int[6];
+            Constants.matchTeams[i / 6][i % 6] = teamNumber;
+        }
+        reader.Close();
     }
 
     void checkMatchNumberInput(string value) {
