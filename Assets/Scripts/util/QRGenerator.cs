@@ -79,7 +79,7 @@ public class QRGenerator
 
     public static string getBinaryString(MatchData data)
     {
-        string ret = ensureBits(data.teamIndex, 3);
+        string ret = "0" + ensureBits(data.teamIndex, 3);
         ret += ensureBits(data.matchNumber, 7);
         ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 6);
 
@@ -126,7 +126,7 @@ public class QRGenerator
 
     public static string getBinaryString(LocationData data)
     {
-        string ret = ensureBits(data.teamIndex, 3);
+        string ret = "1" + ensureBits(data.teamIndex, 3);
         ret += ensureBits(data.matchNumber, 7);
         ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 6);
 
@@ -185,7 +185,7 @@ public class QRGenerator
         string ret = "";
         foreach(char s in text) {
             // string s2 = new string(s);
-            if(charMap.ContainsKey(s.ToString()) && s != '%') {
+            if(charMap.ContainsKey(s.ToString())) {
                 ret += charMap[s.ToString()];
             }
         }
