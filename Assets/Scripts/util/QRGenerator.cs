@@ -19,9 +19,9 @@ public class QRGenerator
         {"3", "1110110"}, {"6", "1110101"}, {"5", "1110100"}, {"8", "1101111"}, 
         {"7", "1101110"}, {"0", "1101101"}, {"y", "1101100"}, {"p", "1100001"}, 
         {"b", "1100000"}, {"v", "0110110"}, {";", "11000101"}, {"(", "11000100"}, 
-        {"-", "01101111"}, {"k", "01101110"}, {"?", "110001110"}, {"!", "110001101"}, 
+        {"-", "01101111"}, {"k", "01101110"}, {"?", "1100011100"}, {"!", "110001101"}, 
         {", ", "110001100"}, {"x", "11000111111"}, {"j", "11000111110"}, {"q", "11000111101"}, 
-        {"z", "11000111100"}, {"%", "110001111001"}
+        {"z", "11000111100"}, {"%", "1100011101"}
     };
 
     public static Texture2D[] generateQR(String binary, int width, int height) {
@@ -63,18 +63,18 @@ public class QRGenerator
         return texture;
     }
 
-    // Converts a string of 0s and 1s to their ascizi equivalent
+    // Converts a string of 0s and 1s to their ascii equivalent
     public static string getByteString(string binaryString) {
         var list = new List<Byte>();
         Debug.Log(binaryString);
         for (int i = 0; i < binaryString.Length; i += 8) {
-          String t = binaryString.Substring(i, Math.Min(8, binaryString.Length - i));
-          while(t.Length < 8) {
-              t += '0';
-          }
-          list.Add(Convert.ToByte(t, 2));
+            String t = binaryString.Substring(i, Math.Min(8, binaryString.Length - i));
+            if(t.Length < 8) {
+                t += charMap["?"].Substring(0, 8 - t.Length);
+            }
+            list.Add(Convert.ToByte(t, 2));
         }  
-        return Encoding.ASCII.GetString(list.ToArray());
+        return Encoding.GetEncoding("ISO-8859-1").GetString(list.ToArray());
     }
 
     public static string getBinaryString(MatchData data)
@@ -186,6 +186,7 @@ public class QRGenerator
         foreach(char s in text) {
             // string s2 = new string(s);
             if(charMap.ContainsKey(s.ToString())) {
+                Debug.Log(charMap[s.ToString()]);
                 ret += charMap[s.ToString()];
             }
         }

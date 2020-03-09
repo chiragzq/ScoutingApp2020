@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 using TMPro;
+using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
@@ -56,36 +57,28 @@ public class MainMenu : MonoBehaviour
         {
             yield return request.Send();
 
-            if (request.isError) // Error
+            if (request.isNetworkError) // Error
             {
                 Debug.Log(request.error);
             }
             else // Success
             {
-                string path = "Assets/Resources/matches.txt";
-
-                StreamWriter writer = new StreamWriter(path, false);
-                writer.WriteLine(request.downloadHandler.text);
-                writer.Close();
-                populateMatches();
+                string[] teams = request.downloadHandler.text.Split(' ');
+                PlayerPrefsArray.SetIntArray("matches", Array.ConvertAll(teams, int.Parse));
+                populateMatches();  
             }
         }
     }
 
     void populateMatches() {
-        string path = "Assets/Resources/matches.txt";
-
-        StreamReader reader = new StreamReader(path); 
-
-        string[] teams = reader.ReadToEnd().Split(' ');
+        int[] teams = PlayerPrefsArray.GetIntArray("matches", 0, 0);
         Constants.matchTeams = new int[teams.Length / 6][];
         for(int i = 0;i < teams.Length;i ++) {
-            int teamNumber = Int32.Parse(teams[i]);
+            int teamNumber = teams[i];
             if(i % 6 == 0)
                 Constants.matchTeams[i / 6] = new int[6];
             Constants.matchTeams[i / 6][i % 6] = teamNumber;
         }
-        reader.Close();
     }
 
     void checkMatchNumberInput(string value) {
