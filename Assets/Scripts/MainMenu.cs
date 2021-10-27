@@ -52,7 +52,7 @@ public class MainMenu : MonoBehaviour
     }
 
     IEnumerator refreshMatches() {
-        using (UnityWebRequest request = UnityWebRequest.Get("http://chiragzq.github.io/schedule/"))
+        using (UnityWebRequest request = UnityWebRequest.Get("https://robotics.harker.org/schedule"))
         // using (UnityWebRequest request = UnityWebRequest.Get("http://localhost"))
         {
             yield return request.Send();

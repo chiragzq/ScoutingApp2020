@@ -81,7 +81,9 @@ public class QRGenerator
     {
         string ret = "0" + ensureBits(data.teamIndex, 3);
         ret += ensureBits(data.matchNumber, 7);
-        ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 6);
+        ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 7);
+        Debug.Log(Array.IndexOf(Constants.usernames, Constants.username));
+        Debug.Log(ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 7));
 
         ret += ensureBits(data.autonLower, 4);
         ret += ensureBits(data.autonOuter, 4);
@@ -120,6 +122,8 @@ public class QRGenerator
 
         ret += convertText(data.offenseComments + "%");
         ret += convertText(data.generalComments);
+        Debug.Log("ret");
+        Debug.Log(ret);
 
         return ret;
     }
@@ -128,7 +132,7 @@ public class QRGenerator
     {
         string ret = "1" + ensureBits(data.teamIndex, 3);
         ret += ensureBits(data.matchNumber, 7);
-        ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 6);
+        ret += ensureBits(Array.IndexOf(Constants.usernames, Constants.username), 7);
 
         ret += ensureBits(data.autonCycles.Count, 2);
         foreach(LocationData.Cycle cycle in data.autonCycles) {
@@ -167,7 +171,6 @@ public class QRGenerator
 
         ret += convertText(data.offenseComments + "%");
         ret += convertText(data.generalComments);
-
         return ret;
     }
 
