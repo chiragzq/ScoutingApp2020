@@ -25,6 +25,7 @@ public class QRGenerator
     };
 
     public static Texture2D[] generateQR(String binary, int width, int height) {
+        binary = BinaryStringToHexString(binary);
         int QR_THRESHOLD = 400;
         int MAX_EXTRA_BITS = 25; // if the last qr is small, just append it to the previous
 
@@ -41,11 +42,36 @@ public class QRGenerator
 
         int i = 0;
         for(;i < numQRs - 1;i ++) {
-            ret[i] = generateBinaryTexture(ensureBits(i, 3) + ensureBits(numQRs - 1, 3) + binary.Substring(i * QR_THRESHOLD, QR_THRESHOLD), width, height);
+            ret[i] = generateQRCodeTexture(ensureBits(i, 3) + ensureBits(numQRs - 1, 3) + binary.Substring(i * QR_THRESHOLD, QR_THRESHOLD), width, height);
         }
-        ret[i] = generateBinaryTexture(ensureBits(i, 3) + ensureBits(numQRs - 1, 3) + binary.Substring(i * QR_THRESHOLD), width, height);
+        ret[i] = generateQRCodeTexture(ensureBits(i, 3) + ensureBits(numQRs - 1, 3) + binary.Substring(i * QR_THRESHOLD), width, height);
 
         return ret;
+    }
+
+    public static string BinaryStringToHexString(string binary)
+    {
+        if (string.IsNullOrEmpty(binary))
+            return binary;
+
+        StringBuilder result = new StringBuilder(binary.Length / 8 + 1);
+
+        // TODO: check all 1's or 0's... throw otherwise
+
+        int mod4Len = binary.Length % 8;
+        if (mod4Len != 0)
+        {
+            // pad to length multiple of 8
+            binary = binary.PadLeft(((binary.Length / 8) + 1) * 8, '0');
+        }
+
+        for (int i = 0; i < binary.Length; i += 8)
+        {
+            string eightBits = binary.Substring(i, 8);
+            result.AppendFormat("{0:X2}", Convert.ToByte(eightBits, 2));
+        }
+
+        return result.ToString();
     }
 
     public static Texture2D generateBinaryTexture(String binary, int width, int height) {
@@ -61,6 +87,29 @@ public class QRGenerator
         texture.SetPixels(pixels);
         texture.Apply();
         return texture;
+    }
+
+    public static Texture2D generateQRCodeTexture(string text, int width, int height)
+    {
+        var encoded = new Texture2D(256, 256);
+        var color32 = Encode(text, encoded.width, encoded.height);
+        encoded.SetPixels32(color32);
+        encoded.Apply();
+        return encoded;
+    }
+
+    private static Color32[] Encode(string textForEncoding, int width, int height)
+    {
+        var writer = new BarcodeWriter
+        {
+            Format = BarcodeFormat.QR_CODE,
+            Options = new QrCodeEncodingOptions
+            {
+                Height = height,
+                Width = width
+            }
+        };
+        return writer.Write(textForEncoding);
     }
 
     // Converts a string of 0s and 1s to their ascii equivalent
@@ -120,8 +169,19 @@ public class QRGenerator
         ret += data.goodDriver ? "1" : "0";
         ret += data.stableRobot ? "1" : "0";
 
-        ret += convertText(data.offenseComments + "%");
-        ret += convertText(data.generalComments);
+        string comment1 = convertText(data.offenseComments);
+        while(comment1.Length < 100)
+        {
+            comment1 += "100";
+        }
+        ret += comment1;
+        ret += convertText("%");
+        string comment2 = convertText(data.generalComments);
+        while (comment2.Length < 100)
+        {
+            comment2 += "100";
+        }
+        ret += comment2;
         Debug.Log("ret");
         Debug.Log(ret);
 
